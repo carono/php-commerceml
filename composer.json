@@ -1,5 +1,5 @@
 {
-    "name": "zenwalker/commerceml",
+    "name": "carono/commerceml",
     "type": "library",
     "homepage": "https://github.com/zenwalker/php-commerceml",
     "description": "Library for parsing CommerceML files",
@@ -10,6 +10,11 @@
             "homepage": "http://zenwalker.ru",
             "name": "Maxim Poletaev",
             "email": "zenwalker2@gmail.com"
+        },
+        {
+            "homepage": "http://carono.ru",
+            "name": "Aleksandr Kasyanov",
+            "email": "info@carono.ru"
         }
     ],
     "autoload": {
