@@ -1,14 +1,10 @@
 <?php namespace Zenwalker\CommerceML\Model;
 
+use SimpleXMLElement;
 use Zenwalker\CommerceML\ORM\Model;
 
-class Property
+class Property extends Model
 {
-    /**
-     * @var string $id
-     */
-    public $id;
-
     /**
      * @var string $name
      */
@@ -21,37 +17,39 @@ class Property
 
     /**
      * @param SimpleXMLElement|null $importXml
-     * @return \Zenwalker\CommerceML\Model\Property
+     *
+     * @param null                  $owner
      */
-    public function __construct($importXml = null)
+    public function __construct($importXml = null, $owner = null)
     {
-        if (! is_null($importXml)) {
+        $this->owner = $owner;
+        if (!is_null($importXml)) {
             $this->loadImport($importXml);
         }
     }
 
     /**
      * @param SimpleXMLElement $xml
+     *
      * @return void
      */
     public function loadImport($xml)
     {
-        $this->id = (string) $xml->Ид;
-
-        $this->name = (string) $xml->Наименование;
-
-        $valueType = (string) $xml->ТипЗначений;
+        $this->id = (string)$xml->Ид;
+        $this->name = (string)$xml->Наименование;
+        $valueType = (string)$xml->ТипЗначений;
 
         if ($valueType == 'Справочник' && $xml->ВариантыЗначений) {
             foreach ($xml->ВариантыЗначений->Справочник as $value) {
-                $id = (string) $value->ИдЗначения;
-                $this->values[$id] = (string) $value->Значение;
+                $id = (string)$value->ИдЗначения;
+                $this->values[$id] = (string)$value->Значение;
             }
         }
     }
 
     /**
      * @param string $valueId
+     *
      * @return null|string
      */
     public function getValue($valueId)
@@ -59,7 +57,6 @@ class Property
         if (isset($this->values[$valueId])) {
             return $this->values[$valueId];
         }
-
         return null;
     }
 }

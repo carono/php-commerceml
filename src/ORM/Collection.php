@@ -11,7 +11,6 @@ class Collection
      * Class constructor.
      *
      * @param array $items
-     * @return \Zenwalker\CommerceML\ORM\Collection
      */
     public function __construct($items = array())
     {
@@ -22,7 +21,8 @@ class Collection
      * Add item to collection.
      *
      * @param array|object $item
-     * @param string $key
+     * @param string       $key
+     *
      * @return Collection
      */
     public function add($item, $key = 'id')
@@ -31,8 +31,7 @@ class Collection
             foreach ($item as $i) {
                 $this->add($i, $key);
             }
-        }
-        else {
+        } else {
             if (property_exists($item, $key)) {
                 $this->items[$item->{$key}] = $item;
             } else {
@@ -47,14 +46,15 @@ class Collection
      * Filter collection.
      *
      * @param string $key
-     * @param mixed $val
+     * @param mixed  $val
+     *
      * @return Collection
      */
     public function filter($key, $condition, $val)
     {
         $result = array();
-        foreach($this->items as $i => $item) {
-            $filterMethod = 'filter'.ucfirst($key);
+        foreach ($this->items as $i => $item) {
+            $filterMethod = 'filter' . ucfirst($key);
 
             if (method_exists($item, $filterMethod)) {
                 $val = $item->{$filterMethod}($condition, $val);
@@ -66,38 +66,37 @@ class Collection
                     if ($item->{$key} == $val) {
                         $result[$i] = $item;
                     }
-                }
-
-                else if ($condition == '>') {
-                    if ($item->{$key} > $val) {
-                        $result[$i] = $item;
+                } else {
+                    if ($condition == '>') {
+                        if ($item->{$key} > $val) {
+                            $result[$i] = $item;
+                        }
+                    } else {
+                        if ($condition == '>=') {
+                            if ($item->{$key} >= $val) {
+                                $result[$i] = $item;
+                            }
+                        } else {
+                            if ($condition == '<') {
+                                if ($item->{$key} < $val) {
+                                    $result[$i] = $item;
+                                }
+                            } else {
+                                if ($condition == '<=') {
+                                    if ($item->{$key} <= $val) {
+                                        $result[$i] = $item;
+                                    }
+                                } else {
+                                    if ($condition == '!=') {
+                                        if ($item->{$key} != $val) {
+                                            $result[$i] = $item;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-
-                else if ($condition == '>=') {
-                    if ($item->{$key} >= $val) {
-                        $result[$i] = $item;
-                    }
-                }
-
-                else if ($condition == '<') {
-                    if ($item->{$key} < $val) {
-                        $result[$i] = $item;
-                    }
-                }
-
-                else if ($condition == '<=') {
-                    if ($item->{$key} <= $val) {
-                        $result[$i] = $item;
-                    }
-                }
-
-                else if ($condition == '!=') {
-                    if ($item->{$key} != $val) {
-                        $result[$i] = $item;
-                    }
-                }
-
             }
         }
 
@@ -110,7 +109,8 @@ class Collection
      *
      * @param string $index
      * @param string $key
-     * @return bool
+     *
+     * @return $this
      */
     public function remove($index, $key = 'id')
     {
@@ -118,8 +118,7 @@ class Collection
             if (isset($this->items[$index])) {
                 unset($this->items[$index]);
             }
-        }
-        else {
+        } else {
             foreach ($this->filter($key, '=', $index)->fetch() as $i => $filtered) {
                 unset($this->items[$i]);
             }
@@ -141,12 +140,11 @@ class Collection
     /**
      * Get first element from collection.
      *
-     * @return object
+     * @return object|boolean
      */
     public function first()
     {
-        if (! empty($this->items))
-        {
+        if (!empty($this->items)) {
             $firstKey = key($this->items);
             return $this->items[$firstKey];
         }
@@ -158,11 +156,12 @@ class Collection
      * Attach collection to collection.
      *
      * @param Collection $collection
+     *
      * @return void
      */
     public function attach($collection)
     {
-        $attachMethod = 'attach'.array_pop(explode('\\', get_class($collection)));
+        $attachMethod = 'attach' . array_pop(explode('\\', get_class($collection)));
 
         if (method_exists($this, $attachMethod)) {
             $this->{$attachMethod}($collection);
@@ -175,6 +174,7 @@ class Collection
      * Get item by id.
      *
      * @param string $id
+     *
      * @return Model
      */
     public function get($id)

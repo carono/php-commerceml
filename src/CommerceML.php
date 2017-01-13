@@ -29,10 +29,10 @@ class CommerceML
     public function __construct()
     {
         $this->collections = [
-            'category'  => new CategoryCollection(),
-            'product'   => new ProductCollection(),
+            'category' => new CategoryCollection(),
+            'product' => new ProductCollection(),
             'priceType' => new PriceTypeCollection(),
-            'property'  => new PropertyCollection()
+            'property' => new PropertyCollection()
         ];
     }
 
@@ -77,7 +77,7 @@ class CommerceML
         if ($importXml) {
             if ($importXml->Каталог->Товары) {
                 foreach ($importXml->Каталог->Товары->Товар as $product) {
-                    $productId                                = (string)$product->Ид;
+                    $productId = (string)$product->Ид;
                     $buffer['products'][$productId]['import'] = $product;
                 }
             }
@@ -86,7 +86,7 @@ class CommerceML
         if ($offersXml) {
             if ($offersXml->ПакетПредложений->Предложения) {
                 foreach ($offersXml->ПакетПредложений->Предложения->Предложение as $offer) {
-                    $productId                               = (string)$offer->Ид;
+                    $productId = (string)$offer->Ид;
                     $buffer['products'][$productId]['offer'] = $offer;
                 }
             }
@@ -94,9 +94,9 @@ class CommerceML
 
         foreach ($buffer['products'] as $item) {
             $import = isset($item['import']) ? $item['import'] : null;
-            $offer  = isset($item['offer']) ? $item['offer'] : null;
+            $offer = isset($item['offer']) ? $item['offer'] : null;
 
-            $product = new Product($import, $offer);
+            $product = new Product($import, $offer, $this);
             $this->getCollection('product')->add($product);
         }
     }
@@ -111,8 +111,7 @@ class CommerceML
      */
     public function parseCategories($importXml, $parent = null)
     {
-        $xmlCategories = ($importXml->Классификатор->Группы)
-            ? $importXml->Классификатор->Группы
+        $xmlCategories = ($importXml->Классификатор->Группы) ? $importXml->Классификатор->Группы
             : $xmlCategories = $importXml;
 
         foreach ($xmlCategories->Группа as $xmlCategory) {
@@ -156,10 +155,9 @@ class CommerceML
     {
         if ($importXml->Классификатор->Свойства) {
             foreach ($importXml->Классификатор->Свойства->Свойство as $xmlProperty) {
-                $property = new Property($xmlProperty);
+                $property = new Property($xmlProperty, $this);
                 $this->getCollection('property')->add($property);
             }
-
         }
     }
 
@@ -223,9 +221,7 @@ class CommerceML
      */
     private function loadXml($xml)
     {
-        return is_file($xml)
-            ? simplexml_load_file($xml)
-            : simplexml_load_string($xml);
+        return is_file($xml) ? simplexml_load_file($xml) : simplexml_load_string($xml);
     }
 
 }
