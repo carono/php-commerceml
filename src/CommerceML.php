@@ -116,6 +116,7 @@ class CommerceML
 
         foreach ($xmlCategories->Группа as $xmlCategory) {
             $category = new Category($xmlCategory);
+            $category->owner = $this;
 
             if (!is_null($parent)) {
                 $parent->addChild($category);
