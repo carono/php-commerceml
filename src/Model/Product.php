@@ -4,6 +4,7 @@ use Zenwalker\CommerceML\ORM\Model;
 
 class Product extends Model
 {
+    public $характеристикиТовара = [];
     /**
      * @var string $id
      */
@@ -118,7 +119,7 @@ class Product extends Model
                 $name = (string)$requisite->Наименование;
                 $value = (string)$requisite->Значение;
                 if ($name == 'ОписаниеФайла') {
-                    if (count($arr = explode('#', $value)) == 2 && isset($this->images[$arr[0]])){
+                    if (count($arr = explode('#', $value)) == 2 && isset($this->images[$arr[0]])) {
                         $this->images[$arr[0]] = $arr[1];
                     }
                 }
@@ -170,6 +171,11 @@ class Product extends Model
                 $priceModel->rate = (float)$price->Коэффициент;
                 $priceModel->type = $priceTypesCollection ? $priceTypesCollection->get($id) : $id;
                 $this->price[] = $priceModel;
+            }
+        }
+        if ($xml->ХарактеристикиТовара) {
+            foreach ($xml->ХарактеристикиТовара->ХарактеристикаТовара as $property) {
+                $this->характеристикиТовара[(string)$property->Наименование] = (string)$property->Значение;
             }
         }
     }
