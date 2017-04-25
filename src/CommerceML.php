@@ -29,10 +29,10 @@ class CommerceML
     public function __construct()
     {
         $this->collections = [
-            'category' => new CategoryCollection(),
-            'product' => new ProductCollection(),
+            'category'  => new CategoryCollection(),
+            'product'   => new ProductCollection(),
             'priceType' => new PriceTypeCollection(),
-            'property' => new PropertyCollection()
+            'property'  => new PropertyCollection()
         ];
     }
 
@@ -86,7 +86,7 @@ class CommerceML
         if ($offersXml) {
             if ($offersXml->ПакетПредложений->Предложения) {
                 foreach ($offersXml->ПакетПредложений->Предложения->Предложение as $offer) {
-                    $productId = (string)$offer->Ид;
+                    $productId = count($arr = explode('#', (string)$offer->Ид)) == 2 ? $arr[0] : (string)$offer->Ид;
                     $buffer['products'][$productId]['offer'] = $offer;
                 }
             }
