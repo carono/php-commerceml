@@ -154,7 +154,7 @@ class Product extends Model
     public function loadOffers($xml)
     {
         if ($xml->Количество) {
-            $this->quantity = (int)$xml->Количество;
+            $this->quantity = (float)$xml->Количество;
         }
 
         if ($xml->Цены) {
