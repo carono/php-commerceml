@@ -4,6 +4,7 @@ use Zenwalker\CommerceML\ORM\Model;
 
 /**
  * Class Product
+ *
  * @package Zenwalker\CommerceML\Model
  * @property string Штрихкод
  * @property \SimpleXMLElement БазоваяЕдиница
@@ -58,11 +59,7 @@ class Product extends Model
     public function getSpecifications()
     {
         if (!$this->specifications) {
-            if (!$o = $this->getOffer()) {
-                var_dump($this->getOffer());
-                exit;
-            }
-            $this->specifications = new SpecificationCollection($this->owner, $xml->ХарактеристикиТовара);
+            $this->specifications = new SpecificationCollection($this->owner, $this->getOffer()->getSpecificationOffer()->ХарактеристикиТовара);
         }
         return $this->specifications;
     }
