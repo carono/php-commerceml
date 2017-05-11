@@ -6,94 +6,75 @@ use Zenwalker\CommerceML\CommerceML;
  * Class Model
  *
  * @package Zenwalker\CommerceML\ORM
+ * @property string id
+ * @property string name
+ * @property string value
  */
-abstract class Model
+abstract class Model extends \ArrayObject
 {
-    /**
-     * Primary key.
-     *
-     * @var string $id
-     */
-    public $id;
-    /**
-     * @var CommerceML
-     */
-    public $owner;
-
-    /**
-     * Load model data form array.
-     *
-     * @param array $arr
-     *
-     * @return void
-     */
-    public static function loadArray($arr)
+    public function defaultProperties()
     {
-        $self = new static();
-
-        foreach ($arr as $key => $val) {
-            if (property_exists($self, $key)) {
-                $self->{$key} = $val;
-            }
-        }
+        return [
+            'Ид'           => 'id',
+            'Наименование' => 'name',
+            'Значение'     => 'value',
+        ];
     }
 
-    /**
-     * Convert object to array.
-     *
-     * @param array $fields
-     *
-     * @return array
-     */
-    public function toArray($fields = array())
+    public function getClearId()
     {
-        $props = get_object_vars($this);
-
-        if (!empty($fields)) {
-            $result = array();
-            foreach ($props as $key => $val) {
-                if (in_array($key, $fields)) {
-                    $result[$key] = $val;
-                }
-            }
-
-            return $result;
-        }
-
-        return $props;
+        return explode('#', $this->id)[0];
     }
 
-    /**
-     * Get object value.
-     *
-     * @param string $key
-     *
-     * @return mixed|null
-     */
-    public function get($key)
+    public function getIdSuffix()
     {
-        if (property_exists($this, $key)) {
-            return $this->{$key};
-        }
+        return array_slice(explode('#', (string)$this->id), 1)[0];
+    }
 
+    public function __construct(CommerceML $owner, \SimpleXMLElement $xml = null)
+    {
+        $this->owner = $owner;
+        $this->xml = $xml ? $xml : $this->loadXml();
+        $this->init();
+        parent::__construct();
+    }
+
+    public function __get($name)
+    {
+        if (method_exists($this, $method = 'get' . ucfirst($name))) {
+            return call_user_func([$this, $method]);
+        }
+        if ($this->xml) {
+            $attributes = $this->xml;
+            if (isset($attributes[$name])) {
+                return (string)$attributes[$name];
+            }
+            if ($value = $this->xml->{$name}) {
+                return $value;
+            }
+            if ($idx = array_search($name, $this->defaultProperties())) {
+                return (string)$this->xml->{$idx};
+            }
+        }
+        return null;
+    }
+
+    public function loadXml()
+    {
         return null;
     }
 
     /**
-     * Set object value.
-     *
-     * @param string $key
-     * @param mixed  $val
-     *
-     * @return bool
+     * @var CommerceML
      */
-    public function set($key, $val)
-    {
-        if (property_exists($this, $key)) {
-            $this->{$key} = $val;
-            return true;
-        }
+    public $owner;
+    /**
+     * @var \SimpleXMLElement
+     */
+    public $xml;
 
-        return false;
+    public function init()
+    {
+
     }
 }

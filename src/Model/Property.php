@@ -1,62 +1,37 @@
 <?php namespace Zenwalker\CommerceML\Model;
 
-use SimpleXMLElement;
 use Zenwalker\CommerceML\ORM\Model;
 
+/**
+ * Class Property
+ * @package Zenwalker\CommerceML\Model
+ */
 class Property extends Model
 {
-    /**
-     * @var string $name
-     */
-    public $name;
+    public $productId;
+    protected $_value;
 
     /**
-     * @var array $values
+     * @return Simple|null
      */
-    public $values = array();
-
-    /**
-     * @param SimpleXMLElement|null $importXml
-     *
-     * @param null                  $owner
-     */
-    public function __construct($importXml = null, $owner = null)
+    public function getValueModel()
     {
-        $this->owner = $owner;
-        if (!is_null($importXml)) {
-            $this->loadImport($importXml);
-        }
-    }
-
-    /**
-     * @param SimpleXMLElement $xml
-     *
-     * @return void
-     */
-    public function loadImport($xml)
-    {
-        $this->id = (string)$xml->Ид;
-        $this->name = (string)$xml->Наименование;
-        $valueType = (string)$xml->ТипЗначений;
-
-        if ($valueType == 'Справочник' && $xml->ВариантыЗначений) {
-            foreach ($xml->ВариантыЗначений->Справочник as $value) {
-                $id = (string)$value->ИдЗначения;
-                $this->values[$id] = (string)$value->Значение;
+        if ($this->productId && !$this->_value) {
+            $product = $this->owner->catalog->getById($this->productId);
+            $xpath = "ЗначенияСвойств/ЗначенияСвойства[contains(Ид,'{$this->id}')]";
+            $valueXml = $product->xml->xpath($xpath)[0];
+            $value = $this->_value = (string)$valueXml->Значение;
+            if ($property = $this->owner->classifier->getReferenceBookValueById($value)) {
+                $this->_value = new Simple($this->owner, $property);
+            } else {
+                $this->_value = new Simple($this->owner, $valueXml);
             }
         }
+        return $this->_value;
     }
 
-    /**
-     * @param string $valueId
-     *
-     * @return null|string
-     */
-    public function getValue($valueId)
+    public function getValue()
     {
-        if (isset($this->values[$valueId])) {
-            return $this->values[$valueId];
-        }
-        return null;
+        return $this->getValueModel() ? (string)$this->getValueModel()->value : null;
     }
 }
