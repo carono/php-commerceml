@@ -21,9 +21,14 @@ abstract class Model extends \ArrayObject
         ];
     }
 
+    public function getClearId()
+    {
+        return explode('#', $this->id)[0];
+    }
+
     public function getIdSuffix()
     {
-        return array_slice(explode('#', $this->id), 1)[0];
+        return array_slice(explode('#', (string)$this->id), 1)[0];
     }
 
     public function __construct(CommerceML $owner, \SimpleXMLElement $xml = null)
@@ -51,6 +56,7 @@ abstract class Model extends \ArrayObject
                 return (string)$this->xml->{$idx};
             }
         }
+        return null;
     }
 
     public function loadXml()

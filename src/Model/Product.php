@@ -36,10 +36,12 @@ class Product extends Model
 
     public function __get($name)
     {
-        if ($value = $this->getOffer()->{$name}) {
-            return $value;
+        if (!$result = parent::__get($name)) {
+            if ($value = $this->getOffer()->{$name}) {
+                return $value;
+            }
         }
-        return parent::__get($name);
+        return $result;
     }
 
     /**
@@ -56,7 +58,10 @@ class Product extends Model
     public function getSpecifications()
     {
         if (!$this->specifications) {
-            $xml = $this->getOffer()->getSpecificationOffer()->xml;
+            if (!$o = $this->getOffer()) {
+                var_dump($this->getOffer());
+                exit;
+            }
             $this->specifications = new SpecificationCollection($this->owner, $xml->ХарактеристикиТовара);
         }
         return $this->specifications;
@@ -100,7 +105,7 @@ class Product extends Model
      */
     public function getOffer()
     {
-        return $this->owner->offerPackage->getOfferById((string)$this->xml->Ид);
+        return $this->owner->offerPackage->getOfferById($this->getClearId());
     }
 
     public function getImages()

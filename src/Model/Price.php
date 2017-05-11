@@ -21,10 +21,12 @@ class Price extends Model
 
     public function __get($name)
     {
-        if ($this->type && ($value = $this->type->{$name})) {
-            return $value;
+        if ($result = parent::__get($name)) {
+            if ($this->type && ($value = $this->type->{$name})) {
+                return $value;
+            }
         }
-        return parent::__get($name);
+        return $result;
     }
 
     public function defaultProperties()

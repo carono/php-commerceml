@@ -16,8 +16,10 @@ class Image extends Model
 {
     public function init()
     {
-        foreach ($this->xml as $image) {
-            $this->append(new Image($this->owner, $image));
+        if ($this->xml) {
+            foreach ($this->xml as $image) {
+                $this->append(new Image($this->owner, $image));
+            }
         }
     }
 

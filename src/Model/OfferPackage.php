@@ -38,7 +38,7 @@ class OfferPackage extends Model
     public function getOfferById($id)
     {
         foreach ($this->getOffers() as $offer) {
-            if ($offer->id == $id) {
+            if ($offer->getClearId() == $id) {
                 return $offer;
             }
         }
