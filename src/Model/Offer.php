@@ -8,21 +8,28 @@ use Zenwalker\CommerceML\ORM\Model;
 
 class Offer extends Model
 {
-    public function init()
+    public $prices = [];
+    public $specifications = [];
+
+    /**
+     * @return array|SpecificationCollection
+     */
+    public function getSpecifications()
     {
-        foreach ($this->xml->xpath("../Предложение[contains(Ид,'{$this->id}#')]") as $specificationOffer) {
-            $this->append(new Offer($this->owner, $specificationOffer));
+        if (!$this->specifications) {
+            $this->specifications = new SpecificationCollection($this->owner, $this->ХарактеристикиТовара);
         }
-        if (!$this->count()) {
-            $this->append($this);
-        }
+        return $this->specifications;
     }
 
     /**
-     * @return Offer|null
+     * @return array|Price
      */
-    public function getSpecificationOffer()
+    public function getPrices()
     {
-        return $this->getIterator()->current();
+        if ($this->xml && !$this->prices) {
+            $this->prices = new Price($this->owner, $this->xml->Цены);
+        }
+        return $this->prices;
     }
 }

@@ -8,6 +8,7 @@ use Zenwalker\CommerceML\ORM\Model;
 
 /**
  * Class Price
+ *
  * @package Zenwalker\CommerceML\Model
  * @property string performance
  * @property string cost
@@ -53,9 +54,11 @@ class Price extends Model
 
     public function init()
     {
-        foreach ($this->xml->Цена as $price) {
-            $this->append(new Price($this->owner, $price));
+        if ($this->xml->Цена) {
+            foreach ($this->xml->Цена as $price) {
+                $this->append(new Price($this->owner, $price));
+            }
+            $this->getType();
         }
-        $this->getType();
     }
 }

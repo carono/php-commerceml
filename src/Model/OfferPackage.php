@@ -15,7 +15,11 @@ class OfferPackage extends Model
 
     public function loadXml()
     {
-        return $this->owner->offersXml->ПакетПредложений;
+        if ($this->owner->offersXml) {
+            return $this->owner->offersXml->ПакетПредложений;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -23,7 +27,7 @@ class OfferPackage extends Model
      */
     public function getOffers()
     {
-        if (!$this->offers) {
+        if (!$this->offers && $this->xml && $this->xml->Предложения) {
             foreach ($this->xml->Предложения->Предложение as $offer) {
                 $this->offers[] = new Offer($this->owner, $offer);
             }

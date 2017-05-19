@@ -38,7 +38,7 @@ class Catalog extends Model
      */
     public function getProducts()
     {
-        if (!$this->products) {
+        if (!$this->products && $this->xml && $this->xml->Товары) {
             foreach ($this->xml->Товары->Товар as $product) {
                 $this->products[] = new Product($this->owner, $product);
             }

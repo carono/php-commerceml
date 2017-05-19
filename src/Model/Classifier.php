@@ -13,7 +13,7 @@ class Classifier extends Model
      */
     protected $groups = [];
     /**
-     * @var Properties
+     * @var PropertyCollection
      */
     protected $properties;
 
@@ -46,7 +46,7 @@ class Classifier extends Model
     public function getProperties()
     {
         if (!$this->properties) {
-            $this->properties = new Properties($this->owner, $this->xml->Свойства);
+            $this->properties = new PropertyCollection($this->owner, $this->xml->Свойства);
         }
         return $this->properties;
     }

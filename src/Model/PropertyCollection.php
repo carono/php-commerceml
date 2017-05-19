@@ -10,7 +10,7 @@ use Zenwalker\CommerceML\ORM\Model;
  * Class ValueProperties
  * @package Zenwalker\CommerceML\Model
  */
-class Properties extends Model
+class PropertyCollection extends Model
 {
     /**
      * @param $id
@@ -28,7 +28,7 @@ class Properties extends Model
 
     public function init()
     {
-        if ($this->xml->ЗначенияСвойства) {
+        if ($this->xml && $this->xml->ЗначенияСвойства) {
             foreach ($this->xml->ЗначенияСвойства as $property) {
                 $properties = $this->owner->classifier->getProperties();
                 $object = clone $properties->getById($property->Ид);
@@ -37,7 +37,7 @@ class Properties extends Model
                 $this->append($object);
             }
         }
-        if ($this->xml->Свойство) {
+        if ($this->xml && $this->xml->Свойство) {
             foreach ($this->xml->Свойство as $property) {
                 $this->append(new Property($this->owner, $property));
             }
