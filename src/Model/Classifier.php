@@ -19,7 +19,11 @@ class Classifier extends Model
 
     public function loadXml()
     {
-        return $this->owner->importXml ? $this->owner->importXml->Классификатор : null;
+        if ($this->owner->importXml) {
+            return $this->owner->importXml->Классификатор;
+        }else{
+            return null;
+        }
     }
 
     public function getReferenceBookValueById($id)

@@ -34,20 +34,26 @@ class Price extends Model
     {
         return [
             'Представление' => 'performance',
-            'ИдТипаЦены'    => 'id',
+            'ИдТипаЦены' => 'id',
             'ЦенаЗаЕдиницу' => 'cost',
-            'Валюта'        => 'currency',
-            'Единица'       => 'unit',
-            'Коэффициент'   => 'rate'
+            'Валюта' => 'currency',
+            'Единица' => 'unit',
+            'Коэффициент' => 'rate',
         ];
     }
 
     public function getType()
     {
         if (!$this->type && ($id = $this->id)) {
-            if ($type = $this->owner->offerPackage->xml->xpath("//ТипЦены[contains(Ид, '{$id}')]")) {
-                $this->type = new Simple($this->owner, $type[0]);
+            foreach ($this->owner->offerPackage->ТипыЦен as $type) {
+                if ($type->ТипЦены->Ид == $id) {
+                    $this->type = new Simple($this->owner, $type->ТипЦены);
+                }
             }
+// TODO почему то неработает xpath, не могу понять
+//            if ($type = $this->owner->offerPackage->xml->xpath("//ТипЦены[contains(Ид, '{$id}')]")) {
+//                $this->type = new Simple($this->owner, $type[0]);
+//            }
         }
         return $this->type;
     }

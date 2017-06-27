@@ -51,6 +51,10 @@ class Catalog extends Model
      */
     public function loadXml()
     {
-        return $this->owner->importXml ? $this->owner->importXml->Каталог : null;
+        if ($this->owner->importXml) {
+            return $this->owner->importXml->Каталог;
+        }else{
+            return null;
+        }
     }
 }
