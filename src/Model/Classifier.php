@@ -21,9 +21,14 @@ class Classifier extends Model
     {
         if ($this->owner->importXml) {
             return $this->owner->importXml->Классификатор;
-        }else{
+        } else {
             return null;
         }
+    }
+
+    public function getReferenceBook($id)
+    {
+        return $this->xml->xpath("//Свойство[contains(Ид,'{$id}')]/ВариантыЗначений/Справочник");
     }
 
     public function getReferenceBookValueById($id)

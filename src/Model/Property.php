@@ -4,12 +4,21 @@ use Zenwalker\CommerceML\ORM\Model;
 
 /**
  * Class Property
+ *
  * @package Zenwalker\CommerceML\Model
  */
 class Property extends Model
 {
     public $productId;
     protected $_value;
+
+    /**
+     * @return \SimpleXMLElement[]
+     */
+    public function getAvailableValues()
+    {
+        return $this->owner->classifier->getReferenceBook($this->id);
+    }
 
     /**
      * @return Simple|null

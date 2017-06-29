@@ -16,6 +16,7 @@ use Zenwalker\CommerceML\ORM\Collection;
 
 /**
  * Class CommerceML
+ *
  * @package Zenwalker\CommerceML
  * @property Product[] $products
  */
@@ -25,7 +26,13 @@ class CommerceML
     public $classClassifier;
     public $classOfferPackage;
 
+    /**
+     * @var \SimpleXMLElement
+     */
     public $importXml;
+    /**
+     * @var \SimpleXMLElement
+     */
     public $offersXml;
 
     /**
@@ -67,6 +74,14 @@ class CommerceML
      */
     private function loadXml($xml)
     {
-        return is_file($xml) ? simplexml_load_file($xml) : simplexml_load_string($xml);
+        /**
+         * TODO костыль, вырезаем неймспейс, чтобы xpath работало без префиксов вероятно это делается другим способом, но я пока не нешел проще
+         */
+        if (is_file($xml)) {
+            $content = file_get_contents($xml);
+        } else {
+            $content = $xml;
+        }
+        return simplexml_load_string(str_replace('xmlns=', 'ns=', $content));
     }
 }
