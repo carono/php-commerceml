@@ -4,7 +4,9 @@ use Zenwalker\CommerceML\Model\Catalog;
 use Zenwalker\CommerceML\Model\Category;
 use Zenwalker\CommerceML\Model\CategoryCollection;
 use Zenwalker\CommerceML\Model\Classifier;
+use Zenwalker\CommerceML\Model\Document;
 use Zenwalker\CommerceML\Model\OfferPackage;
+use Zenwalker\CommerceML\Model\Order;
 use Zenwalker\CommerceML\Model\PriceType;
 use Zenwalker\CommerceML\Model\PriceTypeCollection;
 use Zenwalker\CommerceML\Model\Product;
@@ -34,7 +36,10 @@ class CommerceML
      * @var \SimpleXMLElement
      */
     public $offersXml;
-
+    /**
+     * @var \SimpleXMLElement
+     */
+    public $ordersXml;
     /**
      * @var Catalog
      */
@@ -50,19 +55,27 @@ class CommerceML
     public $offerPackage;
 
     /**
+     * @var Order
+     */
+    public $order;
+
+    /**
      * Add XML files.
      *
      * @param string|bool $importXml
      * @param string|bool $offersXml
+     * @param bool $ordersXml
      */
-    public function addXmls($importXml = false, $offersXml = false)
+    public function addXmls($importXml = false, $offersXml = false, $ordersXml = false)
     {
         $this->importXml = $this->loadXml($importXml);
         $this->offersXml = $this->loadXml($offersXml);
+        $this->ordersXml = $this->loadXml($ordersXml);
 
         $this->catalog = new Catalog($this);
         $this->classifier = new Classifier($this);
         $this->offerPackage = new OfferPackage($this);
+        $this->order = new Order($this);
     }
 
     /**
