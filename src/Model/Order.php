@@ -15,8 +15,10 @@ class Order extends Model
 
     public function loadXml()
     {
-        foreach ($this->owner->ordersXml->Документ as $document) {
-            $this->documents[] = new Document($this->owner, $document);
+        if ($this->owner->ordersXml) {
+            foreach ($this->owner->ordersXml->Документ as $document) {
+                $this->documents[] = new Document($this->owner, $document);
+            }
         }
         return parent::loadXml();
     }
