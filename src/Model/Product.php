@@ -7,6 +7,8 @@ use Zenwalker\CommerceML\ORM\Model;
  *
  * @package Zenwalker\CommerceML\Model
  * @property string Штрихкод
+ * @property string Артикул
+ * @property string Наименование
  * @property \SimpleXMLElement БазоваяЕдиница
  */
 class Product extends Model

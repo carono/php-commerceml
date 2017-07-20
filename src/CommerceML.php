@@ -1,20 +1,10 @@
 <?php namespace Zenwalker\CommerceML;
 
 use Zenwalker\CommerceML\Model\Catalog;
-use Zenwalker\CommerceML\Model\Category;
-use Zenwalker\CommerceML\Model\CategoryCollection;
 use Zenwalker\CommerceML\Model\Classifier;
-use Zenwalker\CommerceML\Model\Document;
 use Zenwalker\CommerceML\Model\OfferPackage;
 use Zenwalker\CommerceML\Model\Order;
-use Zenwalker\CommerceML\Model\PriceType;
-use Zenwalker\CommerceML\Model\PriceTypeCollection;
 use Zenwalker\CommerceML\Model\Product;
-use Zenwalker\CommerceML\Model\ProductCollection;
-use Zenwalker\CommerceML\Model\Property;
-use Zenwalker\CommerceML\Model\PropertyCollection;
-use Zenwalker\CommerceML\Model\Каталог;
-use Zenwalker\CommerceML\ORM\Collection;
 
 /**
  * Class CommerceML
@@ -68,15 +58,39 @@ class CommerceML
      */
     public function addXmls($importXml = false, $offersXml = false, $ordersXml = false)
     {
-        $this->importXml = $this->loadXml($importXml);
-        $this->offersXml = $this->loadXml($offersXml);
-        $this->ordersXml = $this->loadXml($ordersXml);
+        $this->loadImportXml($importXml);
+        $this->loadOffersXml($offersXml);
+        $this->loadOrdersXml($ordersXml);
+    }
 
+    /**
+     * @param $file
+     */
+    public function loadImportXml($file)
+    {
+        $this->importXml = $this->loadXml($file);
         $this->catalog = new Catalog($this);
         $this->classifier = new Classifier($this);
+    }
+
+    /**
+     * @param $file
+     */
+    public function loadOffersXml($file)
+    {
+        $this->offersXml = $this->loadXml($file);
         $this->offerPackage = new OfferPackage($this);
+    }
+
+    /**
+     * @param $file
+     */
+    public function loadOrdersXml($file)
+    {
+        $this->ordersXml = $this->loadXml($file);
         $this->order = new Order($this);
     }
+
 
     /**
      * Load XML form file or string.
