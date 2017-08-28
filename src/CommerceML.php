@@ -105,10 +105,9 @@ class CommerceML
          * TODO костыль, вырезаем неймспейс, чтобы xpath работало без префиксов вероятно это делается другим способом, но я пока не нешел проще
          */
         if (is_file($xml)) {
-            $content = file_get_contents($xml);
+            return simplexml_load_file($xml);
         } else {
-            $content = $xml;
+            return simplexml_load_string($xml);
         }
-        return simplexml_load_string(str_replace('xmlns=', 'ns=', $content));
     }
 }

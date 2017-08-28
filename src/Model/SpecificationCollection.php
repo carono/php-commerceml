@@ -15,5 +15,6 @@ class SpecificationCollection extends Model
                 $this->append(new Simple($this->owner, $specification));
             }
         }
+        parent::init();
     }
 }

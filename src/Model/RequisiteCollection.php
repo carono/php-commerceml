@@ -8,6 +8,7 @@ use Zenwalker\CommerceML\ORM\Model;
 
 /**
  * Class ValueProperties
+ *
  * @package Zenwalker\CommerceML\Model
  */
 class RequisiteCollection extends Model
@@ -19,5 +20,7 @@ class RequisiteCollection extends Model
                 $this->append(new Simple($this->owner, $requisite));
             }
         }
+        parent::init();
     }
+
 }

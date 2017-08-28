@@ -28,13 +28,13 @@ class Classifier extends Model
 
     public function getReferenceBook($id)
     {
-        return $this->xml->xpath("//Свойство[contains(Ид,'{$id}')]/ВариантыЗначений/Справочник");
+        return $this->xml->xpath("//c:Свойство[contains(c:Ид,'{$id}')]/c:ВариантыЗначений/c:Справочник");
     }
 
     public function getReferenceBookValueById($id)
     {
         if ($id) {
-            return $this->xml->xpath("//Свойство/ВариантыЗначений/Справочник[contains(ИдЗначения,'{$id}')]")[0];
+            return $this->xml->xpath("//c:Свойство/c:ВариантыЗначений/c:Справочник[contains(c:ИдЗначения,'{$id}')]")[0];
         } else {
             return null;
         }

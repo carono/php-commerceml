@@ -12,12 +12,14 @@ use Zenwalker\CommerceML\CommerceML;
  */
 abstract class Model extends \ArrayObject
 {
+    private $namespaceRegistered = false;
+
     public function defaultProperties()
     {
         return [
-            'Ид'           => 'id',
+            'Ид' => 'id',
             'Наименование' => 'name',
-            'Значение'     => 'value',
+            'Значение' => 'value',
         ];
     }
 
@@ -61,6 +63,7 @@ abstract class Model extends \ArrayObject
 
     public function loadXml()
     {
+        $this->registerNamespace();
         return null;
     }
 
@@ -75,6 +78,14 @@ abstract class Model extends \ArrayObject
 
     public function init()
     {
+        $this->registerNamespace();
+    }
 
+    protected function registerNamespace()
+    {
+        if ($this->xml && !$this->namespaceRegistered) {
+            $this->namespaceRegistered = true;
+            $this->xml->registerXPathNamespace('c', 'urn:1C.ru:commerceml_2');
+        }
     }
 }

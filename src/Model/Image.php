@@ -8,6 +8,7 @@ use Zenwalker\CommerceML\ORM\Model;
 
 /**
  * Class Image
+ *
  * @package Zenwalker\CommerceML\Model
  * @property string path
  * @property string caption
@@ -21,6 +22,7 @@ class Image extends Model
                 $this->append(new Image($this->owner, $image));
             }
         }
+        parent::init();
     }
 
     public function getPath()
@@ -30,7 +32,7 @@ class Image extends Model
 
     public function getCaption()
     {
-        if ($xml = $this->xml->xpath("//ЗначениеРеквизита[contains(Значение, '{$this->path}#')]")) {
+        if ($xml = $this->xml->xpath("//c:ЗначениеРеквизита[contains(c:Значение, '{$this->path}#')]")) {
             return array_slice(explode('#', (string)$xml[0]->Значение), 1);
         } else {
             return null;

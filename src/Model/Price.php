@@ -45,15 +45,9 @@ class Price extends Model
     public function getType()
     {
         if (!$this->type && ($id = $this->id)) {
-            foreach ($this->owner->offerPackage->ТипыЦен as $type) {
-                if ($type->ТипЦены->Ид == $id) {
-                    $this->type = new Simple($this->owner, $type->ТипЦены);
-                }
+            if ($type = $this->owner->offerPackage->xml->xpath("//c:ТипЦены[contains(c:Ид, '{$id}')]")) {
+                $this->type = new Simple($this->owner, $type[0]);
             }
-// TODO почему то неработает xpath, не могу понять
-//            if ($type = $this->owner->offerPackage->xml->xpath("//ТипЦены[contains(Ид, '{$id}')]")) {
-//                $this->type = new Simple($this->owner, $type[0]);
-//            }
         }
         return $this->type;
     }
@@ -66,5 +60,6 @@ class Price extends Model
             }
             $this->getType();
         }
+        parent::init();
     }
 }

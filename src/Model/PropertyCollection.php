@@ -8,6 +8,7 @@ use Zenwalker\CommerceML\ORM\Model;
 
 /**
  * Class ValueProperties
+ *
  * @package Zenwalker\CommerceML\Model
  */
 class PropertyCollection extends Model
@@ -42,5 +43,6 @@ class PropertyCollection extends Model
                 $this->append(new Property($this->owner, $property));
             }
         }
+        parent::init();
     }
 }
