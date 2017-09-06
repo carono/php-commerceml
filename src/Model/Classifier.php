@@ -34,7 +34,9 @@ class Classifier extends Model
     public function getReferenceBookValueById($id)
     {
         if ($id) {
-            return $this->xml->xpath("//c:Свойство/c:ВариантыЗначений/c:Справочник[contains(c:ИдЗначения,'{$id}')]")[0];
+            $xpath = "//c:Свойство/c:ВариантыЗначений/c:Справочник[contains(c:ИдЗначения,'{$id}')]";
+            $type = $this->xml->xpath($xpath);
+            return $type ? $type[0] : null;
         } else {
             return null;
         }
