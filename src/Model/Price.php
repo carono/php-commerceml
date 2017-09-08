@@ -45,7 +45,7 @@ class Price extends Model
     public function getType()
     {
         if (!$this->type && ($id = $this->id)) {
-            if ($type = $this->owner->offerPackage->xml->xpath("//c:ТипЦены[contains(c:Ид, '{$id}')]")) {
+            if ($type = $this->owner->offerPackage->xpath("//c:ТипЦены[contains(c:Ид, '{$id}')]")) {
                 $this->type = new Simple($this->owner, $type[0]);
             }
         }
@@ -54,7 +54,7 @@ class Price extends Model
 
     public function init()
     {
-        if ($this->xml->Цена) {
+        if ($this->xml && $this->xml->Цена) {
             foreach ($this->xml->Цена as $price) {
                 $this->append(new Price($this->owner, $price));
             }

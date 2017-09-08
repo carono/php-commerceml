@@ -83,9 +83,24 @@ abstract class Model extends \ArrayObject
 
     protected function registerNamespace()
     {
-        if ($this->xml && !$this->namespaceRegistered) {
+        if ($this->xml && !$this->namespaceRegistered && ($namespaces = $this->xml->getNamespaces())) {
             $this->namespaceRegistered = true;
-            $this->xml->registerXPathNamespace('c', 'urn:1C.ru:commerceml_2');
+            foreach ($namespaces as $namespace) {
+                $this->xml->registerXPathNamespace('c', $namespace);
+            }
         }
+    }
+
+    /**
+     * @param string $path
+     * @return \SimpleXMLElement[]
+     */
+    public function xpath($path)
+    {
+        $this->registerNamespace();
+        if (!$this->namespaceRegistered) {
+            $path = str_replace('c:', '', $path);
+        }
+        return $this->xml->xpath($path);
     }
 }

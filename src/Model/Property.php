@@ -28,7 +28,7 @@ class Property extends Model
         if ($this->productId && !$this->_value) {
             $product = $this->owner->catalog->getById($this->productId);
             $xpath = "c:ЗначенияСвойств/c:ЗначенияСвойства[contains(c:Ид,'{$this->id}')]";
-            $valueXml = $product->xml->xpath($xpath)[0];
+            $valueXml = $product->xpath($xpath)[0];
             $value = $this->_value = (string)$valueXml->Значение;
             if ($property = $this->owner->classifier->getReferenceBookValueById($value)) {
                 $this->_value = new Simple($this->owner, $property);

@@ -28,14 +28,14 @@ class Classifier extends Model
 
     public function getReferenceBook($id)
     {
-        return $this->xml->xpath("//c:Свойство[contains(c:Ид,'{$id}')]/c:ВариантыЗначений/c:Справочник");
+        return $this->xpath("//c:Свойство[contains(c:Ид,'{$id}')]/c:ВариантыЗначений/c:Справочник");
     }
 
     public function getReferenceBookValueById($id)
     {
         if ($id) {
             $xpath = "//c:Свойство/c:ВариантыЗначений/c:Справочник[contains(c:ИдЗначения,'{$id}')]";
-            $type = $this->xml->xpath($xpath);
+            $type = $this->xpath($xpath);
             return $type ? $type[0] : null;
         } else {
             return null;

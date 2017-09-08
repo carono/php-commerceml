@@ -33,7 +33,7 @@ class PropertyCollection extends Model
             foreach ($this->xml->ЗначенияСвойства as $property) {
                 $properties = $this->owner->classifier->getProperties();
                 $object = clone $properties->getById($property->Ид);
-                $object->productId = (string)$this->xml->xpath('..')[0]->Ид;
+                $object->productId = (string)$this->xpath('..')[0]->Ид;
                 $object->init();
                 $this->append($object);
             }
