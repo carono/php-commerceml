@@ -22,6 +22,11 @@ class OfferPackage extends Model
      */
     protected $offers = [];
 
+    /**
+     * @var Simple[] array
+     */
+    protected $priceTypes = [];
+
     public function loadXml()
     {
         if ($this->owner->offersXml) {
@@ -42,6 +47,19 @@ class OfferPackage extends Model
             }
         }
         return $this->offers;
+    }
+
+    /**
+     * @return Simple[]
+     */
+    public function getPriceTypes()
+    {
+        if (!$this->priceTypes && $this->xml){
+            foreach ($this->xpath('//c:ТипыЦен/c:ТипЦены') as $type){
+                $this->priceTypes[] = new Simple($this->owner, $type);
+            }
+        }
+        return $this->priceTypes;
     }
 
     /**
