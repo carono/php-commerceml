@@ -10,7 +10,9 @@ use Zenwalker\CommerceML\ORM\Model;
  * import.xml -> Каталог
  *
  * Class Catalog
+ *
  * @package Zenwalker\CommerceML\Model
+ * @property Product[] $products
  */
 class Catalog extends Model
 {
@@ -53,7 +55,7 @@ class Catalog extends Model
     {
         if ($this->owner->importXml) {
             return $this->owner->importXml->Каталог;
-        }else{
+        } else {
             return null;
         }
     }

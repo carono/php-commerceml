@@ -6,6 +6,11 @@ namespace Zenwalker\CommerceML\Model;
 
 use Zenwalker\CommerceML\ORM\Model;
 
+/**
+ * Class Order
+ *
+ * @package Zenwalker\CommerceML\Model
+ */
 class Order extends Model
 {
     /**

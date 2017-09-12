@@ -6,6 +6,9 @@ use Zenwalker\CommerceML\ORM\Model;
  * Class Property
  *
  * @package Zenwalker\CommerceML\Model
+ * @property \SimpleXMLElement[] availableValues
+ * @property Simple valueModel
+ * @property mixed value
  */
 class Property extends Model
 {

@@ -6,6 +6,11 @@ namespace Zenwalker\CommerceML\Model;
 
 use Zenwalker\CommerceML\ORM\Model;
 
+/**
+ * Class SpecificationCollection
+ *
+ * @package Zenwalker\CommerceML\Model
+ */
 class SpecificationCollection extends Model
 {
     public function init()

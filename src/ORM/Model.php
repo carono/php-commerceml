@@ -92,6 +92,12 @@ abstract class Model extends \ArrayObject
     }
 
     /**
+     * Лучше использовать данный метод, вместо стандартного xpath у SimpleXMLElement,
+     * т.к. есть проблемы с неймспейсами xmlns
+     *
+     * Для каждого элемента необходимо указывать наймспейс "c", например:
+     * //c:Свойство/c:ВариантыЗначений/c:Справочник[contains(c:ИдЗначения,'{$id}')]
+     *
      * @param string $path
      * @return \SimpleXMLElement[]
      */

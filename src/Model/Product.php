@@ -9,7 +9,14 @@ use Zenwalker\CommerceML\ORM\Model;
  * @property string Штрихкод
  * @property string Артикул
  * @property string Наименование
+ *
  * @property \SimpleXMLElement БазоваяЕдиница
+ * @property Image images
+ * @property Offer offer
+ * @property Group group
+ * @property RequisiteCollection requisites
+ * @property Price[] prices
+ * @property PropertyCollection properties
  */
 class Product extends Model
 {
@@ -57,11 +64,11 @@ class Product extends Model
     }
 
     /**
-     * @return Price|null
+     * @return Price[]
      */
     public function getPrices()
     {
-        return $this->getOffer() ? $this->getOffer()->getPrices() : null;
+        return $this->getOffer() ? $this->getOffer()->getPrices() : [];
     }
 
     /**

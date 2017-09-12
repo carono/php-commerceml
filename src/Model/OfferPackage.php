@@ -11,9 +11,6 @@ use Zenwalker\CommerceML\ORM\Model;
  *
  * @package Zenwalker\CommerceML\Model
  * @property Offer[] offers
- * @property string Артикул
- * @property string Наименование
- * @property string Количество
  */
 class OfferPackage extends Model
 {

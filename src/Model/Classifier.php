@@ -6,6 +6,13 @@ namespace Zenwalker\CommerceML\Model;
 
 use Zenwalker\CommerceML\ORM\Model;
 
+/**
+ * Class Classifier
+ *
+ * @package Zenwalker\CommerceML\Model
+ * @property PropertyCollection properties
+ * @property Group[] groups
+ */
 class Classifier extends Model
 {
     /**
