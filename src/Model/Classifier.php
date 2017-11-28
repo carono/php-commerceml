@@ -26,7 +26,7 @@ class Classifier extends Model
 
     public function loadXml()
     {
-        if ($this->owner->importXml) {
+        if ($this->owner->importXml && $this->owner->importXml->Классификатор) {
             return $this->owner->importXml->Классификатор;
         } else {
             return null;
