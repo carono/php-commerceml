@@ -25,21 +25,31 @@ class PropertyCollection extends Simple
         return null;
     }
 
+    protected function loadPropertiesValue()
+    {
+        foreach ($this->xml->ЗначенияСвойства as $property) {
+            $properties = $this->owner->classifier->getProperties();
+            $object = clone $properties->getById($property->Ид);
+            $object->productId = (string)$this->xpath('..')[0]->Ид;
+            $object->init();
+            $this->append($object);
+        }
+    }
+
+    protected function loadProperties()
+    {
+        foreach ($this->xml->Свойство as $property) {
+            $this->append(new Property($this->owner, $property));
+        }
+    }
+
     public function init()
     {
         if ($this->xml && $this->xml->ЗначенияСвойства) {
-            foreach ($this->xml->ЗначенияСвойства as $property) {
-                $properties = $this->owner->classifier->getProperties();
-                $object = clone $properties->getById($property->Ид);
-                $object->productId = (string)$this->xpath('..')[0]->Ид;
-                $object->init();
-                $this->append($object);
-            }
+            $this->loadPropertiesValue();
         }
         if ($this->xml && $this->xml->Свойство) {
-            foreach ($this->xml->Свойство as $property) {
-                $this->append(new Property($this->owner, $property));
-            }
+            $this->loadProperties();
         }
         parent::init();
     }
