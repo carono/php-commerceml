@@ -28,7 +28,7 @@ class Group extends Simple
      */
     public function getChildren()
     {
-        if (!$this->children && $this->xml->Группы) {
+        if (empty($this->children) && $this->xml->Группы) {
             foreach ($this->xml->Группы->Группа as $group) {
                 $this->children[] = new Group($this->owner, $group);
             }

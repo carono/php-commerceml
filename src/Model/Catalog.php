@@ -37,7 +37,7 @@ class Catalog extends Simple
      */
     public function getProducts()
     {
-        if (!$this->products && $this->xml && $this->xml->Товары) {
+        if (empty($this->products) && $this->xml && $this->xml->Товары) {
             foreach ($this->xml->Товары->Товар as $product) {
                 $this->products[] = new Product($this->owner, $product);
             }

@@ -72,7 +72,7 @@ class Classifier extends Simple
      */
     public function getGroups()
     {
-        if (!$this->groups) {
+        if (empty($this->groups)) {
             foreach ($this->xml->Группы->Группа as $group) {
                 $this->groups[] = new Group($this->owner, $group);
             }
