@@ -45,10 +45,10 @@ class PropertyCollection extends Simple
 
     public function init()
     {
-        if ($this->xml && $this->xml->ЗначенияСвойства) {
+        if (isset($this->xml->ЗначенияСвойства)) {
             $this->loadPropertiesValue();
         }
-        if ($this->xml && $this->xml->Свойство) {
+        if (isset($this->xml->Свойство)) {
             $this->loadProperties();
         }
         parent::init();
