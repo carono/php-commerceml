@@ -13,7 +13,7 @@ class PropertyCollection extends Simple
 {
     /**
      * @param $id
-     * @return Product|null
+     * @return Property|null
      */
     public function getById($id)
     {
