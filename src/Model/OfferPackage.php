@@ -4,15 +4,13 @@
 namespace Zenwalker\CommerceML\Model;
 
 
-use Zenwalker\CommerceML\ORM\Model;
-
 /**
  * Class OfferPackage
  *
  * @package Zenwalker\CommerceML\Model
  * @property Offer[] offers
  */
-class OfferPackage extends Model
+class OfferPackage extends Simple
 {
     /**
      * @var Offer[]
@@ -51,8 +49,8 @@ class OfferPackage extends Model
      */
     public function getPriceTypes()
     {
-        if (!$this->priceTypes && $this->xml){
-            foreach ($this->xpath('//c:ТипыЦен/c:ТипЦены') as $type){
+        if (!$this->priceTypes && $this->xml) {
+            foreach ($this->xpath('//c:ТипыЦен/c:ТипЦены') as $type) {
                 $this->priceTypes[] = new Simple($this->owner, $type);
             }
         }

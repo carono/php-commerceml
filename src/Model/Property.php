@@ -1,7 +1,5 @@
 <?php namespace Zenwalker\CommerceML\Model;
 
-use Zenwalker\CommerceML\ORM\Model;
-
 /**
  * Class Property
  *
@@ -10,7 +8,7 @@ use Zenwalker\CommerceML\ORM\Model;
  * @property Simple valueModel
  * @property mixed value
  */
-class Property extends Model
+class Property extends Simple
 {
     public $productId;
     protected $_value;

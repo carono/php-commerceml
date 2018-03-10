@@ -4,8 +4,6 @@
 namespace Zenwalker\CommerceML\Model;
 
 
-use Zenwalker\CommerceML\ORM\Model;
-
 /**
  * Class Image
  *
@@ -13,7 +11,7 @@ use Zenwalker\CommerceML\ORM\Model;
  * @property string path
  * @property string caption
  */
-class Image extends Model
+class Image extends Simple
 {
     public function init()
     {

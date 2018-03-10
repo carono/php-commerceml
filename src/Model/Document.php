@@ -4,9 +4,7 @@
 namespace Zenwalker\CommerceML\Model;
 
 
-use Zenwalker\CommerceML\ORM\Model;
-
-class Document extends Model
+class Document extends Simple
 {
 
 }

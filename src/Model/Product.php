@@ -1,7 +1,5 @@
 <?php namespace Zenwalker\CommerceML\Model;
 
-use Zenwalker\CommerceML\ORM\Model;
-
 /**
  * Class Product
  *
@@ -18,7 +16,7 @@ use Zenwalker\CommerceML\ORM\Model;
  * @property Price[] prices
  * @property PropertyCollection properties
  */
-class Product extends Model
+class Product extends Simple
 {
     /**
      * @var PropertyCollection

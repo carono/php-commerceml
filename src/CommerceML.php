@@ -101,9 +101,6 @@ class CommerceML
      */
     private function loadXml($xml)
     {
-        /**
-         * TODO костыль, вырезаем неймспейс, чтобы xpath работало без префиксов вероятно это делается другим способом, но я пока не нешел проще
-         */
         if (is_file($xml)) {
             return simplexml_load_file($xml);
         } else {

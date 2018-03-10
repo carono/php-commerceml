@@ -4,14 +4,12 @@
 namespace Zenwalker\CommerceML\Model;
 
 
-use Zenwalker\CommerceML\ORM\Model;
-
 /**
  * Class SpecificationCollection
  *
  * @package Zenwalker\CommerceML\Model
  */
-class SpecificationCollection extends Model
+class SpecificationCollection extends Simple
 {
     public function init()
     {

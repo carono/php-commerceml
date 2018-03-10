@@ -4,14 +4,12 @@
 namespace Zenwalker\CommerceML\Model;
 
 
-use Zenwalker\CommerceML\ORM\Model;
-
 /**
  * Class Order
  *
  * @package Zenwalker\CommerceML\Model
  */
-class Order extends Model
+class Order extends Simple
 {
     /**
      * @var Document[]
@@ -25,6 +23,6 @@ class Order extends Model
                 $this->documents[] = new Document($this->owner, $document);
             }
         }
-        return parent::loadXml();
+        return $this->owner->ordersXml;
     }
 }

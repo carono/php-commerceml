@@ -4,14 +4,12 @@
 namespace Zenwalker\CommerceML\Model;
 
 
-use Zenwalker\CommerceML\ORM\Model;
-
 /**
  * Class ValueProperties
  *
  * @package Zenwalker\CommerceML\Model
  */
-class PropertyCollection extends Model
+class PropertyCollection extends Simple
 {
     /**
      * @param $id

@@ -4,8 +4,6 @@
 namespace Zenwalker\CommerceML\Model;
 
 
-use Zenwalker\CommerceML\ORM\Model;
-
 /**
  * Class Group
  *
@@ -13,7 +11,7 @@ use Zenwalker\CommerceML\ORM\Model;
  * @property Group parent
  * @property Group[] children
  */
-class Group extends Model
+class Group extends Simple
 {
     /**
      * @var Group[]

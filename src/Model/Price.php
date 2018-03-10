@@ -4,8 +4,6 @@
 namespace Zenwalker\CommerceML\Model;
 
 
-use Zenwalker\CommerceML\ORM\Model;
-
 /**
  * Class Price
  *
@@ -16,7 +14,7 @@ use Zenwalker\CommerceML\ORM\Model;
  * @property string unit
  * @property string rate
  */
-class Price extends Model
+class Price extends Simple
 {
     protected $type;
 

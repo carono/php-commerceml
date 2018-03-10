@@ -4,15 +4,13 @@
 namespace Zenwalker\CommerceML\Model;
 
 
-use Zenwalker\CommerceML\ORM\Model;
-
 /**
  * Class Offer
  *
  * @package Zenwalker\CommerceML\Model
  * @property Price[] prices
  */
-class Offer extends Model
+class Offer extends Simple
 {
     /**
      * @var Price[]

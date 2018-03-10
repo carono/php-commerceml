@@ -4,14 +4,12 @@
 namespace Zenwalker\CommerceML\Model;
 
 
-use Zenwalker\CommerceML\ORM\Model;
-
 /**
  * Class ValueProperties
  *
  * @package Zenwalker\CommerceML\Model
  */
-class RequisiteCollection extends Model
+class RequisiteCollection extends Simple
 {
     public function init()
     {

@@ -3,9 +3,6 @@
 
 namespace Zenwalker\CommerceML\Model;
 
-
-use Zenwalker\CommerceML\ORM\Model;
-
 /**
  * import.xml -> Каталог
  *
@@ -14,7 +11,7 @@ use Zenwalker\CommerceML\ORM\Model;
  * @package Zenwalker\CommerceML\Model
  * @property Product[] $products
  */
-class Catalog extends Model
+class Catalog extends Simple
 {
     /**
      * @var Product[]
