@@ -26,9 +26,8 @@ class Property extends Simple
      */
     public function getValueModel()
     {
-        if ($this->productId && !$this->_value) {
-            $product = $this->owner->catalog->getById($this->productId);
-            $xpath = "c:ЗначенияСвойств/c:ЗначенияСвойства[contains(c:Ид,'{$this->id}')]";
+        if ($this->productId && !$this->_value && ($product = $this->owner->catalog->getById($this->productId))) {
+            $xpath = "c:ЗначенияСвойств/c:ЗначенияСвойства[c:Ид = '{$this->id}']";
             $valueXml = $product->xpath($xpath)[0];
             $value = $this->_value = (string)$valueXml->Значение;
             if ($property = $this->owner->classifier->getReferenceBookValueById($value)) {

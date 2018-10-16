@@ -102,9 +102,9 @@ class CommerceML
     private function loadXml($xml)
     {
         if (is_file($xml)) {
-            return simplexml_load_file($xml);
-        } else {
-            return simplexml_load_string($xml);
+            return simplexml_load_string(file_get_contents($xml));
         }
+
+        return simplexml_load_string($xml);
     }
 }

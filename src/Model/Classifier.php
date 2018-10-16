@@ -26,25 +26,26 @@ class Classifier extends Simple
     {
         if ($this->owner->importXml && $this->owner->importXml->Классификатор) {
             return $this->owner->importXml->Классификатор;
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     public function getReferenceBook($id)
     {
-        return $this->xpath("//c:Свойство[contains(c:Ид,'{$id}')]/c:ВариантыЗначений/c:Справочник");
+
+        return $this->xpath("//c:Свойство[c:Ид = '{$id}']/c:ВариантыЗначений/c:Справочник");
     }
 
     public function getReferenceBookValueById($id)
     {
         if ($id) {
-            $xpath = "//c:Свойство/c:ВариантыЗначений/c:Справочник[contains(c:ИдЗначения,'{$id}')]";
+            $xpath = "//c:Свойство/c:ВариантыЗначений/c:Справочник[c:ИдЗначения = '{$id}']";
             $type = $this->xpath($xpath);
             return $type ? $type[0] : null;
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     public function getGroupById($id)
@@ -52,7 +53,9 @@ class Classifier extends Simple
         foreach ($this->getGroups() as $group) {
             if ($group->id == $id) {
                 return $group;
-            } elseif ($child = $group->getChildById($id)) {
+            }
+
+            if ($child = $group->getChildById($id)) {
                 return $child;
             }
         }

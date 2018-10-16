@@ -36,7 +36,7 @@ abstract class Model extends \ArrayObject
     public function __construct(CommerceML $owner, \SimpleXMLElement $xml = null)
     {
         $this->owner = $owner;
-        $this->xml = $xml ? $xml : $this->loadXml();
+        $this->xml = $xml ?: $this->loadXml();
         $this->init();
         parent::__construct();
     }
@@ -59,6 +59,14 @@ abstract class Model extends \ArrayObject
             }
         }
         return null;
+    }
+
+    public function __set($name, $value)
+    {
+    }
+
+    public function __isset($name)
+    {
     }
 
     public function loadXml()
@@ -96,7 +104,7 @@ abstract class Model extends \ArrayObject
      * т.к. есть проблемы с неймспейсами xmlns
      *
      * Для каждого элемента необходимо указывать наймспейс "c", например:
-     * //c:Свойство/c:ВариантыЗначений/c:Справочник[contains(c:ИдЗначения,'{$id}')]
+     * //c:Свойство/c:ВариантыЗначений/c:Справочник[c:ИдЗначения = '{$id}']
      *
      * @param string $path
      * @return \SimpleXMLElement[]

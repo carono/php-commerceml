@@ -32,8 +32,8 @@ class Image extends Simple
     {
         if ($xml = $this->xpath("//c:ЗначениеРеквизита[contains(c:Значение, '{$this->path}#')]")) {
             return array_slice(explode('#', (string)$xml[0]->Значение), 1);
-        } else {
-            return null;
         }
+
+        return null;
     }
 }

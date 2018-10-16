@@ -26,9 +26,9 @@ class OfferPackage extends Simple
     {
         if ($this->owner->offersXml) {
             return $this->owner->offersXml->ПакетПредложений;
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**

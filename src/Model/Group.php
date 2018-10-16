@@ -42,7 +42,7 @@ class Group extends Simple
     public function getParent()
     {
         if (!$this->parent) {
-            $parent = $this->xpath("../..")[0];
+            $parent = $this->xpath('../..')[0];
             if ($parent->getName() == 'Группа') {
                 $this->parent = new Group($this->owner, $parent);
             }
@@ -59,7 +59,9 @@ class Group extends Simple
         foreach ($this->getChildren() as $child) {
             if ($child->id == $id) {
                 return $child;
-            } elseif ($subChild = $child->getChildById($id)) {
+            }
+
+            if ($subChild = $child->getChildById($id)) {
                 return $subChild;
             }
         }

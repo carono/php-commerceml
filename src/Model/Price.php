@@ -28,6 +28,14 @@ class Price extends Simple
         return $result;
     }
 
+    public function __set($name, $value)
+    {
+    }
+
+    public function __isset($name)
+    {
+    }
+
     public function defaultProperties()
     {
         return [
@@ -43,7 +51,7 @@ class Price extends Simple
     public function getType()
     {
         if (!$this->type && ($id = $this->id)) {
-            if ($type = $this->owner->offerPackage->xpath("//c:ТипЦены[contains(c:Ид, '{$id}')]")) {
+            if ($type = $this->owner->offerPackage->xpath("//c:ТипЦены[c:Ид = '{$id}']")) {
                 $this->type = new Simple($this->owner, $type[0]);
             }
         }
@@ -54,7 +62,7 @@ class Price extends Simple
     {
         if ($this->xml && $this->xml->Цена) {
             foreach ($this->xml->Цена as $price) {
-                $this->append(new Price($this->owner, $price));
+                $this->append(new self($this->owner, $price));
             }
             $this->getType();
         }
