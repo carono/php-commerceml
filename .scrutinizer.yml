@@ -1,0 +1,20 @@
+imports:
+- php
+
+tools:
+    php_sim: false
+    php_cpd: false
+checks:
+    php:
+        code_rating: true
+        duplication: true
+
+build:
+    nodes:
+        coverage:
+            tests:
+                override:
+                - command: 'vendor/bin/phpunit'
+                  coverage:
+                      file: './tests/output/clover.xml'
+                      format: clover
