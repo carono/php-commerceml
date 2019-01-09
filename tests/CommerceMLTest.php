@@ -1,51 +1,49 @@
 <?php
 
-namespace Zenwalker\CommerceML;
+namespace Zenwalker\CommerceML\Tests;
 
 
-class CommerceMLTest extends \PHPUnit\Framework\TestCase
+class CommerceMLTest extends TestCase
 {
-    private $import = __DIR__ . '/xml/import.xml';
-    private $offer = __DIR__ . '/xml/offers.xml';
-    private $order = __DIR__ . '/xml/orders.xml';
     /**
-     * @var CommerceML
+     * @dataProvider xmlProvider
+     * @param $values
      */
-    private $cml;
-
-
-    private function init()
+    public function testAddXmls($values): void
     {
-        $this->cml = new CommerceML();
-    }
-
-    public function testAddXmls()
-    {
-        $this->init();
-        $this->cml->addXmls($this->import, $this->offer, $this->order);
+        $this->cml->addXmls($values['import'], $values['offer'], $values['order']);
         $this->assertNotEmpty($this->cml->catalog->xml);
         $this->assertNotEmpty($this->cml->classifier->xml);
         $this->assertNotEmpty($this->cml->order->xml);
     }
 
-    public function testLoadImportXml()
+    /**
+     * @dataProvider xmlProvider
+     * @param $values
+     */
+    public function testLoadImportXml($values): void
     {
-        $this->init();
-        $this->cml->loadImportXml($this->import);
+        $this->cml->loadImportXml($values['import']);
         $this->assertNotEmpty($this->cml->catalog->xml);
     }
 
-    public function testLoadOffersXml()
+    /**
+     * @dataProvider xmlProvider
+     * @param $values
+     */
+    public function testLoadOffersXml($values): void
     {
-        $this->init();
-        $this->cml->loadImportXml($this->offer);
+        $this->cml->loadImportXml($values['offer']);
         $this->assertNotEmpty($this->cml->classifier->xml);
     }
 
-    public function testLoadOrdersXml()
+    /**
+     * @dataProvider xmlProvider
+     * @param $values
+     */
+    public function testLoadOrdersXml($values): void
     {
-        $this->init();
-        $this->cml->loadOrdersXml($this->order);
+        $this->cml->loadOrdersXml($values['order']);
         $this->assertNotEmpty($this->cml->order->xml);
     }
 }

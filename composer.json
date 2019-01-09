@@ -1,29 +1,35 @@
 {
-    "name": "carono/commerceml",
-    "type": "library",
-    "homepage": "https://github.com/zenwalker/php-commerceml",
-    "description": "Library for parsing CommerceML files",
-    "keywords": ["commerceml", "1c"],
-    "license": "MIT",
-    "authors": [
-        {
-            "homepage": "http://zenwalker.ru",
-            "name": "Maxim Poletaev",
-            "email": "zenwalker2@gmail.com"
-        },
-        {
-            "homepage": "http://carono.ru",
-            "name": "Aleksandr Kasyanov",
-            "email": "info@carono.ru"
-        }
-    ],
-    "autoload": {
-        "psr-4": {"Zenwalker\\CommerceML\\": "src/"}
+  "name": "carono/commerceml",
+  "type": "library",
+  "homepage": "https://github.com/zenwalker/php-commerceml",
+  "description": "Library for parsing CommerceML files",
+  "keywords": [
+    "commerceml",
+    "1c"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "homepage": "http://zenwalker.ru",
+      "name": "Maxim Poletaev",
+      "email": "zenwalker2@gmail.com"
     },
-    "require": {
-        "ext-SimpleXML": "*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^7.0"
+    {
+      "homepage": "http://carono.ru",
+      "name": "Aleksandr Kasyanov",
+      "email": "info@carono.ru"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Zenwalker\\CommerceML\\": "src/",
+      "Zenwalker\\CommerceML\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "ext-SimpleXML": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.0"
+  }
 }
