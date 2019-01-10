@@ -33,7 +33,7 @@ class Offer extends Simple
     }
 
     /**
-     * @return array|Price
+     * @return Price[]
      */
     public function getPrices()
     {

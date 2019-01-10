@@ -95,7 +95,7 @@ class CommerceML
      *
      * @param string $xml
      *
-     * @return \SimpleXMLElement
+     * @return \SimpleXMLElement|false
      */
     private function loadXml($xml)
     {
