@@ -14,6 +14,9 @@ abstract class Model extends \ArrayObject
 {
     private $namespaceRegistered = false;
 
+    /**
+     * @return array
+     */
     public function defaultProperties()
     {
         return [
@@ -23,16 +26,28 @@ abstract class Model extends \ArrayObject
         ];
     }
 
+    /**
+     * @return string
+     */
     public function getClearId()
     {
-        return explode('#', $this->id)[0];
+        return (string)explode('#', $this->id)[0];
     }
 
+    /**
+     * @return string
+     */
     public function getIdSuffix()
     {
-        return array_slice(explode('#', (string)$this->id), 1)[0];
+        return (string)\array_slice(explode('#', (string)$this->id), 1)[0];
     }
 
+    /**
+     * Model constructor.
+     *
+     * @param CommerceML $owner
+     * @param \SimpleXMLElement|null $xml
+     */
     public function __construct(CommerceML $owner, \SimpleXMLElement $xml = null)
     {
         $this->owner = $owner;
@@ -41,6 +56,10 @@ abstract class Model extends \ArrayObject
         parent::__construct();
     }
 
+    /**
+     * @param $name
+     * @return mixed|null|\SimpleXMLElement|string
+     */
     public function __get($name)
     {
         if (method_exists($this, $method = 'get' . ucfirst($name))) {

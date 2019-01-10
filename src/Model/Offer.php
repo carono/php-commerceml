@@ -11,6 +11,7 @@ use Zenwalker\CommerceML\Collections\SpecificationCollection;
  *
  * @package Zenwalker\CommerceML\Model
  * @property Price[] prices
+ * @property \SimpleXMLElement !ХарактеристикиТовара
  */
 class Offer extends Simple
 {
@@ -25,7 +26,7 @@ class Offer extends Simple
      */
     public function getSpecifications()
     {
-        if (!$this->specifications) {
+        if (empty($this->specifications)) {
             $this->specifications = new SpecificationCollection($this->owner, $this->ХарактеристикиТовара);
         }
         return $this->specifications;
@@ -36,7 +37,7 @@ class Offer extends Simple
      */
     public function getPrices()
     {
-        if ($this->xml && !$this->prices) {
+        if ($this->xml && empty($this->prices)) {
             $this->prices = new Price($this->owner, $this->xml->Цены);
         }
         return $this->prices;

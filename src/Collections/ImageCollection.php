@@ -11,8 +11,6 @@ use Zenwalker\CommerceML\Model\Simple;
  * Class Image
  *
  * @package Zenwalker\CommerceML\Model
- * @property string path
- * @property string caption
  */
 class ImageCollection extends Simple
 {

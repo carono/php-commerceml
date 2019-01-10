@@ -36,7 +36,7 @@ class OfferPackage extends Simple
      */
     public function getOffers()
     {
-        if (!$this->offers && $this->xml && $this->xml->Предложения) {
+        if (empty($this->offers) && $this->xml && $this->xml->Предложения) {
             foreach ($this->xml->Предложения->Предложение as $offer) {
                 $this->offers[] = new Offer($this->owner, $offer);
             }
@@ -49,7 +49,7 @@ class OfferPackage extends Simple
      */
     public function getPriceTypes()
     {
-        if (!$this->priceTypes && $this->xml) {
+        if (empty($this->priceTypes) && $this->xml) {
             foreach ($this->xpath('//c:ТипыЦен/c:ТипЦены') as $type) {
                 $this->priceTypes[] = new Simple($this->owner, $type);
             }
@@ -65,7 +65,7 @@ class OfferPackage extends Simple
     public function getOfferById($id)
     {
         foreach ($this->getOffers() as $offer) {
-            if ($offer->getClearId() == $id) {
+            if ($offer->getClearId() === $id) {
                 return $offer;
             }
         }

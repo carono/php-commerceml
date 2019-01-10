@@ -14,6 +14,7 @@ use Zenwalker\CommerceML\Collections\SpecificationCollection;
  * @property string !Наименование
  *
  * @property \SimpleXMLElement !БазоваяЕдиница
+ * @property \SimpleXMLElement !Группы
  * @property ImageCollection images
  * @property Offer offer
  * @property Offer[] offers
@@ -60,7 +61,7 @@ class Product extends Simple
     }
 
     /**
-     * @return SpecificationCollection
+     * @return SpecificationCollection|null|array
      * @deprecated will removed in 0.3.0
      */
     public function getSpecifications()

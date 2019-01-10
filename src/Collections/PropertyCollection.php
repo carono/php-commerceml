@@ -21,7 +21,7 @@ class PropertyCollection extends Simple
     public function getById($id)
     {
         foreach ($this as $property) {
-            if ($property->id == (string)$id) {
+            if ($property->id === (string)$id) {
                 return $property;
             }
         }
@@ -32,7 +32,7 @@ class PropertyCollection extends Simple
     {
         foreach ($this->xml->ЗначенияСвойства as $property) {
             $properties = $this->owner->classifier->getProperties();
-            $object = clone $properties->getById($property->Ид);
+            $object = clone $properties->getById((string)$property->Ид);
             $object->productId = (string)$this->xpath('..')[0]->Ид;
             $object->init();
             $this->append($object);

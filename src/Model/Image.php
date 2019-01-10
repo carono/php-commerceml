@@ -3,7 +3,13 @@
 
 namespace Zenwalker\CommerceML\Model;
 
-
+/**
+ * Class Image
+ *
+ * @package Zenwalker\CommerceML\Model
+ * @property string path
+ * @property string caption
+ */
 class Image extends Simple
 {
 
