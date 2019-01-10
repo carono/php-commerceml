@@ -4,6 +4,8 @@
 namespace Zenwalker\CommerceML\Model;
 
 
+use Zenwalker\CommerceML\Collections\SpecificationCollection;
+
 /**
  * Class Offer
  *

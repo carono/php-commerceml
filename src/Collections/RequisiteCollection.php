@@ -1,8 +1,10 @@
 <?php
 
 
-namespace Zenwalker\CommerceML\Model;
+namespace Zenwalker\CommerceML\Collections;
 
+
+use Zenwalker\CommerceML\Model\Simple;
 
 /**
  * Class ValueProperties

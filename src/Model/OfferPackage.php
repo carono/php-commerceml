@@ -60,6 +60,7 @@ class OfferPackage extends Simple
     /**
      * @param $id
      * @return null|Offer
+     * @deprecated will removed in 0.3.0
      */
     public function getOfferById($id)
     {
@@ -69,5 +70,20 @@ class OfferPackage extends Simple
             }
         }
         return null;
+    }
+
+    /**
+     * @param $id
+     * @return Offer[]
+     */
+    public function getOffersById($id)
+    {
+        $result = [];
+        foreach ($this->getOffers() as $offer) {
+            if ($offer->getClearId() === $id) {
+                $result[] = $offer;
+            }
+        }
+        return $result;
     }
 }

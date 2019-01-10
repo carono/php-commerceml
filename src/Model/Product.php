@@ -1,16 +1,22 @@
 <?php namespace Zenwalker\CommerceML\Model;
 
+use Zenwalker\CommerceML\Collections\ImageCollection;
+use Zenwalker\CommerceML\Collections\PropertyCollection;
+use Zenwalker\CommerceML\Collections\RequisiteCollection;
+use Zenwalker\CommerceML\Collections\SpecificationCollection;
+
 /**
  * Class Product
  *
  * @package Zenwalker\CommerceML\Model
- * @property string Штрихкод
- * @property string Артикул
- * @property string Наименование
+ * @property string !Штрихкод
+ * @property string !Артикул
+ * @property string !Наименование
  *
- * @property \SimpleXMLElement БазоваяЕдиница
- * @property Image images
+ * @property \SimpleXMLElement !БазоваяЕдиница
+ * @property ImageCollection images
  * @property Offer offer
+ * @property Offer[] offers
  * @property Group group
  * @property RequisiteCollection requisites
  * @property Price[] prices
@@ -19,7 +25,7 @@
 class Product extends Simple
 {
     /**
-     * @var PropertyCollection
+     * @var PropertyCollection Свойства продукта
      */
     protected $properties;
     /**
@@ -55,6 +61,7 @@ class Product extends Simple
 
     /**
      * @return SpecificationCollection
+     * @deprecated will removed in 0.3.0
      */
     public function getSpecifications()
     {
@@ -63,6 +70,7 @@ class Product extends Simple
 
     /**
      * @return Price[]
+     * @deprecated will removed in 0.3.0
      */
     public function getPrices()
     {
@@ -87,7 +95,7 @@ class Product extends Simple
     {
         if (!$this->group) {
             foreach ($this->owner->classifier->getGroups() as $group) {
-                if ($group->id == $this->Группы->Ид) {
+                if ($group->id === $this->Группы->Ид) {
                     $this->group = $group;
                 } elseif ($child = $group->getChildById($this->Группы->Ид)) {
                     $this->group = $child;
@@ -99,6 +107,7 @@ class Product extends Simple
 
     /**
      * @return null|Offer
+     * @deprecated will removed in 0.3.0
      */
     public function getOffer()
     {
@@ -106,12 +115,20 @@ class Product extends Simple
     }
 
     /**
-     * @return Image
+     * @return Offer[]
+     */
+    public function getOffers()
+    {
+        return $this->owner->offerPackage->getOffersById($this->getClearId());
+    }
+
+    /**
+     * @return ImageCollection
      */
     public function getImages()
     {
         if (!$this->images) {
-            $this->images = new Image($this->owner, $this->xml->Картинка);
+            $this->images = new ImageCollection($this->owner, $this->xml->Картинка);
         }
         return $this->images;
     }

@@ -4,13 +4,11 @@ use Zenwalker\CommerceML\Model\Catalog;
 use Zenwalker\CommerceML\Model\Classifier;
 use Zenwalker\CommerceML\Model\OfferPackage;
 use Zenwalker\CommerceML\Model\Order;
-use Zenwalker\CommerceML\Model\Product;
 
 /**
  * Class CommerceML
  *
  * @package Zenwalker\CommerceML
- * @property Product[] $products
  */
 class CommerceML
 {

@@ -19,13 +19,13 @@ class Catalog extends Simple
     protected $products = [];
 
     /**
-     * @param $id
+     * @param string $id
      * @return null|Product
      */
     public function getById($id)
     {
         foreach ($this->getProducts() as $product) {
-            if ($product->id == $id) {
+            if ($product->id === $id) {
                 return $product;
             }
         }
@@ -52,8 +52,8 @@ class Catalog extends Simple
     {
         if ($this->owner->importXml) {
             return $this->owner->importXml->Каталог;
-        } else {
-            return null;
         }
+
+        return null;
     }
 }
