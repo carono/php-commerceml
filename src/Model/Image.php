@@ -16,14 +16,14 @@ class Image extends Simple
     }
 
     /**
-     * @return 1|array|null
+     * @return string
      */
     public function getCaption()
     {
         if ($xml = $this->xpath("//c:ЗначениеРеквизита[contains(c:Значение, '{$this->path}#')]")) {
-            return \array_slice(explode('#', (string)$xml[0]->Значение), 1);
+            return (string)\array_slice(explode('#', (string)$xml[0]->Значение), 1);
         }
 
-        return null;
+        return '';
     }
 }
