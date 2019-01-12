@@ -16,7 +16,7 @@ use Zenwalker\CommerceML\Collections\SpecificationCollection;
 class Offer extends Simple
 {
     /**
-     * @var Price[]
+     * @var Price
      */
     protected $prices = [];
     public $specifications = [];
@@ -33,7 +33,7 @@ class Offer extends Simple
     }
 
     /**
-     * @return Price[]
+     * @return Price
      */
     public function getPrices()
     {

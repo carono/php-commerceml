@@ -17,15 +17,15 @@ class CommerceML
     public $classOfferPackage;
 
     /**
-     * @var \SimpleXMLElement
+     * @var \SimpleXMLElement|false
      */
     public $importXml;
     /**
-     * @var \SimpleXMLElement
+     * @var \SimpleXMLElement|false
      */
     public $offersXml;
     /**
-     * @var \SimpleXMLElement
+     * @var \SimpleXMLElement|false
      */
     public $ordersXml;
     /**
