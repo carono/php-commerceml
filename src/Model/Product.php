@@ -9,12 +9,11 @@ use Zenwalker\CommerceML\Collections\SpecificationCollection;
  * Class Product
  *
  * @package Zenwalker\CommerceML\Model
- * @property string !Штрихкод
- * @property string !Артикул
- * @property string !Наименование
- *
- * @property \SimpleXMLElement !БазоваяЕдиница
- * @property \SimpleXMLElement !Группы
+ * @property \SimpleXMLElement Штрихкод
+ * @property \SimpleXMLElement Артикул
+ * @property \SimpleXMLElement Наименование
+ * @property \SimpleXMLElement БазоваяЕдиница
+ * @property \SimpleXMLElement Группы
  * @property ImageCollection images
  * @property Offer offer
  * @property Offer[] offers

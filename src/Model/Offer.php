@@ -11,7 +11,7 @@ use Zenwalker\CommerceML\Collections\SpecificationCollection;
  *
  * @package Zenwalker\CommerceML\Model
  * @property Price[] prices
- * @property \SimpleXMLElement !ХарактеристикиТовара
+ * @property \SimpleXMLElement ХарактеристикиТовара
  */
 class Offer extends Simple
 {
