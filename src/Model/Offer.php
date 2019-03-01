@@ -10,7 +10,8 @@ use Zenwalker\CommerceML\Collections\SpecificationCollection;
  * Class Offer
  *
  * @package Zenwalker\CommerceML\Model
- * @property Price[] prices
+ * @property Price prices
+ * @property SpecificationCollection specifications
  * @property \SimpleXMLElement ХарактеристикиТовара
  */
 class Offer extends Simple
@@ -19,7 +20,7 @@ class Offer extends Simple
      * @var Price
      */
     protected $prices = [];
-    public $specifications = [];
+    protected $specifications = [];
 
     /**
      * @return array|SpecificationCollection

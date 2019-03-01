@@ -49,7 +49,7 @@ class Product extends Simple
     protected $images;
 
     /**
-     * @return PropertyCollection<Simple>
+     * @return PropertyCollection<Property>
      */
     public function getProperties()
     {
@@ -94,11 +94,16 @@ class Product extends Simple
     public function getGroup()
     {
         if (!$this->group) {
+            if (!$this->Группы) {
+                return null;
+            }
+            $groupId = (string)$this->Группы->Ид;
             foreach ($this->owner->classifier->getGroups() as $group) {
-                if ($group->id === $this->Группы->Ид) {
-                    $this->group = $group;
-                } elseif ($child = $group->getChildById($this->Группы->Ид)) {
-                    $this->group = $child;
+                if ($group->id === $groupId) {
+                    return $this->group = $group;
+                }
+                if ($child = $group->getChildById($groupId)) {
+                    return $this->group = $child;
                 }
             }
         }

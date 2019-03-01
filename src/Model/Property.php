@@ -18,7 +18,7 @@ class Property extends Simple
      */
     public function getAvailableValues()
     {
-        return $this->owner->classifier->getReferenceBook($this->id);
+        return $this->owner->classifier->getReferenceBookById($this->id);
     }
 
     /**

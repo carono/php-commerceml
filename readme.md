@@ -22,6 +22,9 @@ $cml->loadImportXml($xmlFilePath);
 
 foreach ($cml->products as $product){
     echo $product->name; // Выводим название товара (Товары->Товар->Наименование)
+    foreach ($product->offers as $offer){
+        echo $offer->name; // Выводим название предложения (Предложения->Предложене->Наименоваие)
+    }
 }
 ```
 
@@ -29,5 +32,4 @@ foreach ($cml->products as $product){
 |-----|----|--------|
 |properties|Каталог->Товары->Товар->ЗначенияСвойств|Свойства продукта, `$product->properties[0]->value`|
 |requisites|Каталог->Товары->Товар->ЗначенияРеквизитов->ЗначениеРеквизита|Реквизиты продукта, `$product->requisites[0]->value`|
-|prices|
 

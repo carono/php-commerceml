@@ -1,6 +1,7 @@
 <?php namespace Zenwalker\CommerceML\ORM;
 
 use Zenwalker\CommerceML\CommerceML;
+use Zenwalker\CommerceML\Model\Simple;
 
 /**
  * Class Model
@@ -15,9 +16,18 @@ abstract class Model extends \ArrayObject
     private $namespaceRegistered = false;
 
     /**
+     * @var CommerceML
+     */
+    public $owner;
+    /**
+     * @var \SimpleXMLElement
+     */
+    public $xml;
+
+    /**
      * @return array
      */
-    public function defaultProperties()
+    public function propertyAliases()
     {
         return [
             'Ид' => 'id',
@@ -63,18 +73,18 @@ abstract class Model extends \ArrayObject
     public function __get($name)
     {
         if (method_exists($this, $method = 'get' . ucfirst($name))) {
-            return call_user_func([$this, $method]);
+            return \call_user_func([$this, $method]);
         }
         if ($this->xml) {
             $attributes = $this->xml;
             if (isset($attributes[$name])) {
-                return (string)$attributes[$name];
+                return trim((string)$attributes[$name]);
             }
             if ($value = $this->xml->{$name}) {
                 return $value;
             }
-            if ($idx = array_search($name, $this->defaultProperties())) {
-                return (string)$this->xml->{$idx};
+            if ($idx = array_search($name, $this->propertyAliases())) {
+                return trim((string)$this->xml->{$idx});
             }
         }
         return null;
@@ -93,15 +103,6 @@ abstract class Model extends \ArrayObject
         $this->registerNamespace();
         return null;
     }
-
-    /**
-     * @var CommerceML
-     */
-    public $owner;
-    /**
-     * @var \SimpleXMLElement
-     */
-    public $xml;
 
     public function init()
     {

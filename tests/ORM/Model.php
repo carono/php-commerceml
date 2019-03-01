@@ -13,7 +13,7 @@ class Model extends ModelTestCase
      * Ид = id
      * Наименование = Name
      *
-     * @see \Zenwalker\CommerceML\ORM\Model::defaultProperties
+     * @see \Zenwalker\CommerceML\ORM\Model::propertyAliases
      */
     public function testAttributeAliases()
     {

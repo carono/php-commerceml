@@ -24,6 +24,9 @@ class Classifier extends Simple
      */
     protected $properties;
 
+    /**
+     * @return null|\SimpleXMLElement
+     */
     public function loadXml()
     {
         if ($this->owner->importXml && $this->owner->importXml->Классификатор) {
@@ -33,12 +36,20 @@ class Classifier extends Simple
         return null;
     }
 
-    public function getReferenceBook($id)
+    /**
+     * @param $id
+     * @return \SimpleXMLElement[]
+     */
+    public function getReferenceBookById($id)
     {
 
         return $this->xpath("//c:Свойство[c:Ид = '{$id}']/c:ВариантыЗначений/c:Справочник");
     }
 
+    /**
+     * @param $id
+     * @return null|\SimpleXMLElement
+     */
     public function getReferenceBookValueById($id)
     {
         if ($id) {
@@ -50,10 +61,14 @@ class Classifier extends Simple
         return null;
     }
 
+    /**
+     * @param $id
+     * @return null|Group
+     */
     public function getGroupById($id)
     {
         foreach ($this->getGroups() as $group) {
-            if ($group->id == $id) {
+            if ($group->id === $id) {
                 return $group;
             }
 
@@ -64,6 +79,9 @@ class Classifier extends Simple
         return null;
     }
 
+    /**
+     * @return PropertyCollection
+     */
     public function getProperties()
     {
         if (!$this->properties) {

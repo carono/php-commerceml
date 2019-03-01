@@ -43,7 +43,7 @@ class Group extends Simple
     {
         if (!$this->parent) {
             $parent = $this->xpath('../..')[0];
-            if ($parent->getName() == 'Группа') {
+            if ($parent->getName() === 'Группа') {
                 $this->parent = new Group($this->owner, $parent);
             }
         }
@@ -51,13 +51,13 @@ class Group extends Simple
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @return null|Group
      */
     public function getChildById($id)
     {
         foreach ($this->getChildren() as $child) {
-            if ($child->id == $id) {
+            if ($child->id === $id) {
                 return $child;
             }
 

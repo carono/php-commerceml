@@ -13,6 +13,7 @@ namespace Zenwalker\CommerceML\Model;
  * @property string currency
  * @property string unit
  * @property string rate
+ * @property Simple type
  */
 class Price extends Simple
 {
@@ -28,15 +29,7 @@ class Price extends Simple
         return $result;
     }
 
-    public function __set($name, $value)
-    {
-    }
-
-    public function __isset($name)
-    {
-    }
-
-    public function defaultProperties()
+    public function propertyAliases()
     {
         return [
             'Представление' => 'performance',
