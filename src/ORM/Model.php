@@ -124,16 +124,23 @@ abstract class Model extends \ArrayObject
      * т.к. есть проблемы с неймспейсами xmlns
      *
      * Для каждого элемента необходимо указывать наймспейс "c", например:
-     * //c:Свойство/c:ВариантыЗначений/c:Справочник[c:ИдЗначения = '{$id}']
-     *
+     * //c:Свойство/c:ВариантыЗначений/c:Справочник[c:ИдЗначения = ':параметр']
+     * 
      * @param string $path
+     * @param array $args - Аргументы задаём в бинд стиле ['параметр'=>'значение'] без двоеточия
      * @return \SimpleXMLElement[]
      */
-    public function xpath($path)
+    public function xpath($path, $args=[])
     {
+        ActiveQuery::
         $this->registerNamespace();
         if (!$this->namespaceRegistered) {
             $path = str_replace('c:', '', $path);
+        }
+        if (!empty($args) and is_array($args)) {
+            foreach ($args as $ka=>$kv) {
+                $path = str_replace(':'.$ka, (strstr($kv,"'")?("concat('" .str_replace("'", "',\"'\",'",$kv) . "')"): "'" . $kv . "'") , $path);
+            }
         }
         return $this->xml->xpath($path);
     }
