@@ -9,6 +9,7 @@ namespace Zenwalker\CommerceML\Model;
  *
  * @package Zenwalker\CommerceML\Model
  * @property Offer[] offers
+ * @property string containsOnlyChanges
  */
 class OfferPackage extends Simple
 {
@@ -21,6 +22,13 @@ class OfferPackage extends Simple
      * @var Simple[] array
      */
     protected $priceTypes = [];
+
+    public function propertyAliases()
+    {
+        return array_merge(parent::propertyAliases(), [
+            'СодержитТолькоИзменения' => 'containsOnlyChanges'
+        ]);
+    }
 
     public function loadXml()
     {
