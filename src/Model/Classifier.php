@@ -53,8 +53,8 @@ class Classifier extends Simple
     public function getReferenceBookValueById($id)
     {
         if ($id) {
-            $xpath = "//c:Свойство/c:ВариантыЗначений/c:Справочник[c:ИдЗначения = '{$id}']";
-            $type = $this->xpath($xpath);
+            $xpath = "//c:Свойство/c:ВариантыЗначений/c:Справочник[c:ИдЗначения = :id]";
+            $type = $this->xpath($xpath, ['id'=>$id]);
             return $type ? $type[0] : null;
         }
 
