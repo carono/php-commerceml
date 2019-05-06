@@ -132,7 +132,6 @@ abstract class Model extends \ArrayObject
      */
     public function xpath($path, $args=[])
     {
-        ActiveQuery::
         $this->registerNamespace();
         if (!$this->namespaceRegistered) {
             $path = str_replace('c:', '', $path);
