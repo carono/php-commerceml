@@ -1,4 +1,6 @@
 # 0.2.4
+* Для $offerPackage добавлен параметр containsOnlyChanges алиас для СодержитТолькоИзменения
+* В поиск xpath добавлена возможность указывать аргументы для бинда xpath('//c:Справочник[c:ИдЗначения = :id]', ['id' => $id])
 * Переименован метод \Zenwalker\CommerceML\Model\Classifier::getReferenceBookValue => getReferenceBookValueById
 * Переименован метод defaultProperties в propertyAliases в базовом классе модели
 * Добавлены тесты
