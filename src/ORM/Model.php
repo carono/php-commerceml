@@ -84,6 +84,9 @@ abstract class Model extends \ArrayObject
                 return $value;
             }
             if ($idx = array_search($name, $this->propertyAliases())) {
+                if (isset($attributes[$idx])) {
+                    return trim((string)$attributes[$idx]);
+                }
                 return trim((string)$this->xml->{$idx});
             }
         }
