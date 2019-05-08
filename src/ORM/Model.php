@@ -68,6 +68,22 @@ abstract class Model extends \ArrayObject
 
     /**
      * @param $name
+     * @return null|string
+     */
+    protected function getPropertyAlias($name)
+    {
+        $attributes = $this->xml;
+        if ($idx = array_search($name, $this->propertyAliases())) {
+            if (isset($attributes[$idx])) {
+                return trim((string)$attributes[$idx]);
+            }
+            return trim((string)$this->xml->{$idx});
+        }
+        return null;
+    }
+
+    /**
+     * @param $name
      * @return mixed|null|\SimpleXMLElement|string
      */
     public function __get($name)
@@ -83,11 +99,8 @@ abstract class Model extends \ArrayObject
             if ($value = $this->xml->{$name}) {
                 return $value;
             }
-            if ($idx = array_search($name, $this->propertyAliases())) {
-                if (isset($attributes[$idx])) {
-                    return trim((string)$attributes[$idx]);
-                }
-                return trim((string)$this->xml->{$idx});
+            if (($value = $this->getPropertyAlias($name)) !== null) {
+                return $value;
             }
         }
         return null;
@@ -141,7 +154,8 @@ abstract class Model extends \ArrayObject
         }
         if (!empty($args) && \is_array($args)) {
             foreach ($args as $ka => $kv) {
-                $path = str_replace(':' . $ka, (strstr($kv, "'") ? ("concat('" . str_replace("'", "',\"'\",'", $kv) . "')") : "'" . $kv . "'"), $path);
+                $replace = (false !== strpos($kv, "'") ? ("concat('" . str_replace("'", "',\"'\",'", $kv) . "')") : "'" . $kv . "'");
+                $path = str_replace(':' . $ka, $replace, $path);
             }
         }
         return $this->xml->xpath($path);
