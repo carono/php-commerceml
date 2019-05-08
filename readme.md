@@ -17,19 +17,36 @@
 ```php
 // $filePath - полный путь до XML файла import.xml или контент
 $cml = new CommerceML();
-$cml->loadImportXml($xmlFilePath);
+$cml->loadImportXml('/fullpath/import.xml'); // Загружаем товары
+$cml->loadOffersXml('/fullpath/offers.xml'); // Загружаем предложения
+```
 
+# Работа с товарами и предложениями
 
+```php
 foreach ($cml->products as $product){
     echo $product->name; // Выводим название товара (Товары->Товар->Наименование)
     foreach ($product->offers as $offer){
-        echo $offer->name; // Выводим название предложения (Предложения->Предложене->Наименоваие)
+        echo $offer->name; // Выводим название предложения (Предложения->Предложение->Наименование)
+        echo $offer->prices[0]->cost; // Выводим первую цену предложения (Предложения->Предложение->Цены->Цена->ЦенаЗаЕдиницу)
     }
 }
 ```
+
+## \Zenwalker\CommerceML\CommerceML  
+
+
+## \Zenwalker\CommerceML\Model\Product
 
 |Метод|XML|Описание|
 |-----|----|--------|
 |properties|Каталог->Товары->Товар->ЗначенияСвойств|Свойства продукта, `$product->properties[0]->value`|
 |requisites|Каталог->Товары->Товар->ЗначенияРеквизитов->ЗначениеРеквизита|Реквизиты продукта, `$product->requisites[0]->value`|
+|offers|Предложения->Предложение|Список предложений для продукта
+|group|Каталог->Товары->Товар->Группы=>Классификатор->группы->группа|Группа товара `$product->group->name` 
+|
+
+## \Zenwalker\CommerceML\Model\OfferPackage
+
+## \Zenwalker\CommerceML\Model\Offer
 

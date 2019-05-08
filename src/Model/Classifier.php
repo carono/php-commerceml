@@ -42,8 +42,7 @@ class Classifier extends Simple
      */
     public function getReferenceBookById($id)
     {
-
-        return $this->xpath("//c:Свойство[c:Ид = '{$id}']/c:ВариантыЗначений/c:Справочник");
+        return $this->xpath('//c:Свойство[c:Ид = :id]/c:ВариантыЗначений/c:Справочник', ['id' => $id]);
     }
 
     /**
@@ -53,8 +52,8 @@ class Classifier extends Simple
     public function getReferenceBookValueById($id)
     {
         if ($id) {
-            $xpath = "//c:Свойство/c:ВариантыЗначений/c:Справочник[c:ИдЗначения = :id]";
-            $type = $this->xpath($xpath, ['id'=>$id]);
+            $xpath = '//c:Свойство/c:ВариантыЗначений/c:Справочник[c:ИдЗначения = :id]';
+            $type = $this->xpath($xpath, ['id' => $id]);
             return $type ? $type[0] : null;
         }
 

@@ -98,14 +98,7 @@ class Product extends Simple
                 return null;
             }
             $groupId = (string)$this->Группы->Ид;
-            foreach ($this->owner->classifier->getGroups() as $group) {
-                if ($group->id === $groupId) {
-                    return $this->group = $group;
-                }
-                if ($child = $group->getChildById($groupId)) {
-                    return $this->group = $child;
-                }
-            }
+            $this->group = $this->owner->classifier->getGroupById($groupId);
         }
         return $this->group;
     }
