@@ -44,7 +44,7 @@ class Price extends Simple
     public function getType()
     {
         if (!$this->type && ($id = $this->id)) {
-            if ($type = $this->owner->offerPackage->xpath("//c:ТипЦены[c:Ид = '{$id}']")) {
+            if ($type = $this->owner->offerPackage->xpath('//c:ТипЦены[c:Ид = :id]', ['id' => $id])) {
                 $this->type = new Simple($this->owner, $type[0]);
             }
         }

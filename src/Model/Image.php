@@ -26,7 +26,7 @@ class Image extends Simple
      */
     public function getCaption()
     {
-        if ($xml = $this->xpath("//c:ЗначениеРеквизита[contains(c:Значение, '{$this->path}#')]")) {
+        if ($xml = $this->xpath('//c:ЗначениеРеквизита[contains(c:Значение, :path)]', ['path' => "{$this->path}#"])) {
             return (string)current(\array_slice(explode('#', (string)$xml[0]->Значение), 1));
         }
 
