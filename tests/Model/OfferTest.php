@@ -42,4 +42,16 @@ class OfferTest extends ModelTestCase
         $this->assertEquals('false', $this->cml->offerPackage->containsOnlyChanges);
         $this->assertEquals('false', $this->cml->offerPackage->СодержитТолькоИзменения);
     }
+
+    public function testStocksroom()
+    {
+        $stockroom = $this->cml->offerPackage->getStockrooms()[0];
+        $offer = $this->offers[0];
+        $this->assertEquals('b6112590-41ba-11dd-ac9d-0015e9b8c48d', $stockroom->id);
+        $this->assertEquals('Магазин "Обувь"', $stockroom->name);
+
+        $this->assertEquals('b6112590-41ba-11dd-ac9d-0015e9b8c48d', $offer->getStockrooms()[0]->id);
+        $this->assertEquals('Магазин "Обувь"', $offer->getStockrooms()[0]->getPackageStockroom()->name);
+        $this->assertEquals('20', $offer->getStockrooms()[0]->count);
+    }
 }

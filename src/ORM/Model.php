@@ -73,11 +73,15 @@ abstract class Model extends \ArrayObject
     protected function getPropertyAlias($name)
     {
         $attributes = $this->xml;
-        if ($idx = array_search($name, $this->propertyAliases())) {
+        $aliases = $this->propertyAliases();
+        while ($idx = array_search($name, $aliases)) {
             if (isset($attributes[$idx])) {
                 return trim((string)$attributes[$idx]);
             }
-            return trim((string)$this->xml->{$idx});
+            if (isset($this->xml->{$idx})) {
+                return trim((string)$this->xml->{$idx});
+            }
+            unset($aliases[$idx]);
         }
         return null;
     }

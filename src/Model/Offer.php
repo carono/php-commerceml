@@ -20,6 +20,7 @@ class Offer extends Simple
      * @var Price
      */
     protected $prices = [];
+    protected $stockrooms = [];
     protected $specifications = [];
 
     /**
@@ -42,5 +43,15 @@ class Offer extends Simple
             $this->prices = new Price($this->owner, $this->xml->Цены);
         }
         return $this->prices;
+    }
+
+    public function getStockrooms()
+    {
+        if ($this->xml && empty($this->stockrooms)) {
+            foreach ($this->xml->Склад as $stockroom) {
+                $this->stockrooms[] = new Stockroom($this->owner, $stockroom);
+            }
+        }
+        return $this->stockrooms;
     }
 }
