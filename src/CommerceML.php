@@ -47,6 +47,12 @@ class CommerceML
      */
     public $order;
 
+    public $importXmlFilePath;
+
+    public $offersXmlFilePath;
+
+    public $ordersXmlFilePath;
+
     /**
      * Add XML files.
      *
@@ -66,6 +72,7 @@ class CommerceML
      */
     public function loadImportXml($file)
     {
+        $this->importXmlFilePath = $file;
         $this->importXml = $this->loadXml($file);
         $this->catalog = new Catalog($this);
         $this->classifier = new Classifier($this);
@@ -76,6 +83,7 @@ class CommerceML
      */
     public function loadOffersXml($file)
     {
+        $this->offersXmlFilePath = $file;
         $this->offersXml = $this->loadXml($file);
         $this->offerPackage = new OfferPackage($this);
     }
@@ -85,6 +93,7 @@ class CommerceML
      */
     public function loadOrdersXml($file)
     {
+        $this->ordersXmlFilePath = $file;
         $this->ordersXml = $this->loadXml($file);
         $this->order = new Order($this);
     }
