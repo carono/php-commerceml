@@ -24,6 +24,8 @@ class Classifier extends Simple
      */
     protected $properties;
 
+    protected $stockrooms = [];
+
     /**
      * @return null|\SimpleXMLElement
      */
@@ -100,5 +102,18 @@ class Classifier extends Simple
             }
         }
         return $this->groups;
+    }
+
+    /**
+     * @return Stockroom[]
+     */
+    public function getStockrooms()
+    {
+        if (empty($this->stockrooms) && isset($this->xml->Склады)) {
+            foreach ($this->xml->Склады->Склад as $stockroom) {
+                $this->stockrooms[] = new Stockroom($this->owner, $stockroom);
+            }
+        }
+        return $this->stockrooms;
     }
 }

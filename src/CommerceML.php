@@ -86,6 +86,7 @@ class CommerceML
         $this->offersXmlFilePath = $file;
         $this->offersXml = $this->loadXml($file);
         $this->offerPackage = new OfferPackage($this);
+        $this->classifier = new Classifier($this);
     }
 
     /**
